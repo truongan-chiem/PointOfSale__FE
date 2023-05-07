@@ -8,6 +8,8 @@ import { login, resetError } from "../../redux/Slice/userSlice";
 import "./Login.scss";
 import { useNavigate } from "react-router-dom";
 import Loading from "../../components/Loading/Loading";
+import useWindowSize  from '../../hook/useWindowSize'
+
 const Login = () => {
   const [formData, setFormData] = useState({ account: "", password: "" });
   const [error, setError] = useState(null);
@@ -46,6 +48,8 @@ const Login = () => {
     }
   }, [error,navigate]);
 
+  const {width} = useWindowSize()
+
   return (
     <div className="login">
       {isLoading && <Loading />}
@@ -56,6 +60,7 @@ const Login = () => {
           value={formData.account}
           onChange={(e) => setFormData((prev) => ({ ...prev, account: e.target.value }))}
           className={`login__form__input ${error ? 'error' :''}`}
+          left = {width <= 768 ? '1rem' : '2rem'}
           placeholder="Account"
         />
         <Input
@@ -63,6 +68,7 @@ const Login = () => {
           onChange={(e) => setFormData((prev) => ({ ...prev, password: e.target.value }))}
           className={`login__form__input ${error ? 'error' :''}`}
           type = "password"
+          left = {width <= 768 ? '1rem' : '2rem'}
           placeholder="Password"
         />
         <Button className={"login__form__btn"}>Login</Button>
