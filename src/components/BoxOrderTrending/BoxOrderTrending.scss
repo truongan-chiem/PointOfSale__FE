@@ -1,0 +1,84 @@
+@use '../../sass/' as *;
+
+.box-order-trending{
+    padding: 2rem;
+    grid-column: span 2;
+    @include mobile{
+        grid-column: span 1;
+    }
+    & > * ~*{
+        margin-top: 2rem;
+    }
+    &__header{
+        @include flex(center,space-between);
+
+        &>h1{
+            font-size: 3rem;
+            text-transform: capitalize;
+            font-weight: 700;
+            @include mobile{
+                font-size: 1.5rem;
+            }
+        }
+        & > button{
+            font-weight: 700;
+            color: rgba($color: $main-color, $alpha: 0.5);
+            cursor: pointer;
+            background-color: transparent;
+            outline: none;
+            border: none;
+            @include flex(center,center);
+            transition: all 0.3s ease;
+            &:hover{
+                color: $main-color;
+            }
+            & > span{
+                margin-right: 1rem;
+            }
+        }
+    }
+    &__subtitle{
+        text-transform: capitalize;
+        color: gray;
+        font-size: 1.5rem;
+    }
+    &__listItem{
+        display: grid;
+        grid-template-columns:auto auto;
+        @include mobile{
+            grid-template-columns:auto;
+        }
+        gap: 2rem;
+        &__item{
+            @include flex(null,null);
+            & > img{
+                width: 4rem;
+                height: 4rem;
+                border-radius: 1rem;
+                margin-right: 0.5rem;
+            }
+            &__info{
+                & > h4{
+                    margin-bottom: 0.4rem;
+                    text-transform: capitalize;
+                    font-size: 1.5rem;
+                    overflow: hidden;
+                    display: -webkit-box;
+                    -webkit-line-clamp: 2; /* number of lines to show */
+                    -webkit-box-orient: vertical;
+                }
+                & > p{
+                    @include flex(null,null);
+                    color : rgba($color: gray, $alpha: 0.7);
+                    text-transform: capitalize;
+                    & > span{
+                        color : $main-color;
+                        margin-left: 1rem;
+                        font-weight: 700;
+                    }
+                }
+            }
+
+        }
+    }
+}

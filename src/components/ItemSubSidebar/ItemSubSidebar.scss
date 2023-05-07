@@ -1,0 +1,48 @@
+@use '../../sass/' as *;
+
+.item-sub-sidebar{
+    width: 100%;
+   
+    padding: 1rem 2rem;
+    @include flex(center,flex-start);
+    color: $gray;
+    background-color: transparent;
+    transition: all 0.3s ease;
+    border-radius: 1.5rem;
+    margin-bottom: 1rem;
+    & > svg{
+        font-size: 2rem;
+    }
+    & >span{
+        margin-left: 2rem;
+        font-size: 1.7rem;
+        text-transform: capitalize;
+        font-weight: 600;
+    }
+    &:hover{
+        color: $main-color;
+        cursor: pointer;
+    }
+    &.active{
+        background-color: rgba($color: $main-color, $alpha: 0.4);
+        color: $black;
+        & > svg{
+            color: $main-color;
+        }
+    }
+    @include desktop{
+        width: fit-content;
+        padding: 1rem;
+        & > span{
+            display: none;
+        }
+        & > svg{
+            font-size: 3rem;
+        }
+    }
+    @include mobile{
+        & > svg{
+            font-size: 2rem;
+        }
+    }
+}

@@ -1,0 +1,74 @@
+@use '../../sass/' as *;
+
+.input{
+    @include flex(center,space-between);
+    background-color: $white;
+    border-radius: 0.5rem;
+    position: relative;
+    &__text{
+        position: relative;
+        border: 1px solid transparent;
+        transition: all 0.3s ease;
+        width: 95%;
+        padding: 2rem 0;
+        @include desktop{
+            padding: 1rem 0;
+        }
+        & > input{
+            background-color: transparent;
+            width: 100%;
+            outline: none;
+            border: none;
+            font-size: 1.5rem;
+            color: $main-color;
+    
+            &:valid ~ .label__search{
+                display: none;
+            }
+            &:valid ~ .label__normal , &:focus ~ .label__normal{
+                top: 20%;
+                font-size: 1rem;
+                font-weight: 700;
+                @include mobile{
+                    font-size: 0.8rem;
+                }
+            }
+            @include mobile{
+                font-size: 1.2rem;
+            }
+        }
+        & > label{
+            white-space: nowrap;
+            transition: all 0.3s ease;
+            position: absolute;
+            text-transform: capitalize;
+            top: 50%;
+            left: 0;
+            transform: translateY(-50%);
+            pointer-events: none;
+            color: rgba($color: $main-color, $alpha: 0.8);
+            font-size: 1.5rem;
+            @include tablet{
+                font-size: 1.2rem;
+            }
+        }
+    }
+    & > svg{
+        font-size: 2rem;
+        color: $main-color;
+        margin-right: 1rem;
+    }
+    &__seepw{
+        position: absolute;
+        top: 50%;
+        right: 1rem;
+        transform: translateY(-50%);
+        font-size: 1.7rem;
+        color: $main-color;
+        cursor: pointer;
+        transition: color 0.3s ease;
+        &:hover{
+            color: rgba($color: $main-color, $alpha: 0.6);
+        }
+    }
+}

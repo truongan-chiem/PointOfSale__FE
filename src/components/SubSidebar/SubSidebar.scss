@@ -1,0 +1,26 @@
+@use '../../sass/' as *;
+
+.sub-sidebar{
+    width: 30%;
+    height: 89vh;
+    border-radius: 3rem;
+    padding: 2rem;
+    @include desktop{
+        width: 76%;
+        position: fixed;
+        top: 1%;
+        left: 21%;
+        height: fit-content;
+        @include flex(center,flex-start);
+        padding: 1rem 2rem;
+        border-radius: 1.5rem;
+        & > *{
+            margin-bottom: 0;
+        }
+    }
+    @include mobile{
+        left: 28%;
+        width: 66%;
+        padding: 1rem;
+    }
+}

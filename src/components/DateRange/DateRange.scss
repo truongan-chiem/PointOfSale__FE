@@ -1,0 +1,55 @@
+@use '../../sass/' as *;
+
+.calendarWrap {
+    position: relative;
+    &__input{
+        padding: 2rem;
+        border: 1px solid $main-color;
+        border-radius: 1rem;
+        @include flex(center,center);
+        &:hover{
+            cursor: pointer;
+        }
+        & > input{
+            outline: none;
+            border: none;
+            &:hover{
+                cursor: pointer;
+            }
+        }
+        & > svg{
+            width: 2rem;
+            height: 2rem;
+            color: $main-color;
+        }
+       @include mobile{
+            padding: 1rem;
+            & > input{
+                display: none;
+            }
+       }
+    }
+    @include mobile{
+        .rdrDefinedRangesWrapper{
+            display: none;
+        }
+        .rdrDateRangePickerWrapper{
+            scale: 0.8;
+
+        }
+        .calendarElement{
+            right: -100%;
+            top: 1rem;
+        }
+    }
+}
+
+.calendarElement {
+    position: absolute;
+    right: 0%;
+    top: 8rem;
+    border: 1px solid  $main-color;
+    border-radius: 2rem;
+    overflow: hidden;
+    z-index: 999;
+  }

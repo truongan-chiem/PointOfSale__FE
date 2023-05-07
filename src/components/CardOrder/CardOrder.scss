@@ -1,0 +1,83 @@
+@use '../../sass/' as *;
+
+.card-order{
+    border: 1px solid transparent;
+    padding: 2rem;
+    transition: all 0.3s ease;
+    &__header{
+        @include flex(center,space-between);
+
+        & > h1{
+            text-transform: capitalize;
+            font-weight: 700;
+            font-size: 2.5rem;
+        }
+        & > p {
+            color: $gray;
+            font-size: 2.2rem;
+            font-weight: 600;
+        }
+    }
+    &__body{
+        margin-top: 1rem;
+        @include flex(flex-end,space-between);
+        & > h4{
+            text-transform: capitalize;
+            color: $gray;
+            font-size: 1.6rem;
+        }
+        &__info{
+            @include flex(center,flex-end);
+            & > h1{
+                font-weight: 700;
+                font-size: 3.5rem;
+            }
+            & > div{
+                background-color: $green;
+                margin-right: 2rem;
+
+                color: $white;
+                padding: 1rem;
+                border-radius: 1.2rem;
+                text-transform: capitalize;
+                font-size: 1.6rem;
+            }
+        }
+    }
+    &:hover{
+        cursor: pointer;
+        box-shadow: rgba(222, 146, 52, 0.2) 10px 7px 29px 20px;
+    }
+    &.active{
+        border: 1px solid $main-color;
+    }
+}
+.timer{
+    color: $main-color;
+    font-size: 1.5rem;
+    font-weight: 700;
+    &.done{
+        color: $green;
+        animation: done 0.5s linear;
+    }
+    &.hide{
+        animation: hide 1s linear;
+    }
+}
+
+@keyframes done {
+    from{
+        opacity: 0;
+    }
+    to{
+        opacity: 1;
+    }
+}
+@keyframes hide {
+    from{
+        opacity: 1;
+    }
+    to{
+        opacity: 0;
+    }
+}

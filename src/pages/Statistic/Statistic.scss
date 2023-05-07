@@ -1,0 +1,23 @@
+@use '../../sass/' as *;
+
+.statistic{
+    &__content{
+        margin-top: 2rem;
+
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 2rem;
+        @include desktop{
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+        @include mobile{
+            grid-template-columns: repeat(1, minmax(0, 1fr));
+        }
+    }
+    &__header{
+        @include flex(center,space-between);
+        & > .calendarWrap > .calendarWrap__input{
+            background-color: #fff;
+        }
+    }
+}

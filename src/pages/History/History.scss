@@ -1,0 +1,134 @@
+@use '../../sass/' as *;
+
+.history{
+    &__box{
+        padding: 2rem;
+        margin-top: 1rem;
+    }
+    &__header{
+        @include flex(center,space-between);
+    }
+    &__body{
+        width: 100%;
+        margin-top: 2rem;
+        font-size: 1.6rem;
+        &__loading{
+            font-weight: 700;
+            color: $main-color;
+            font-size: 4rem;
+            margin-top: 10rem;
+            text-align: center;
+            animation: chopchop 1s infinite;
+        }
+        & > table{
+            & > tr{
+                position: relative;
+                & > th{
+                    text-align: start;
+                    font-size: 2rem;
+                    padding: 1rem;
+                    &:last-child{
+                        text-align: center;
+                    }
+                    @include desktop{
+                        font-size: 1rem;
+                    }
+                }
+                & > td{
+                    padding: 1rem;
+                    & > .iconMore{
+                        @include flex(center,center);
+                        & > svg{
+                            cursor: pointer;
+                        }
+                    }
+                    @include desktop{
+                        font-size: 1.1rem;
+                    }
+                }
+                & > td > .history__price{
+                    color: black ;
+                    font-weight: 400;
+                    @include desktop{
+                       font-size: 1rem;
+                    }
+                }
+            }
+            & > * ~ *::after{
+                position: absolute;
+                content: "";
+                top: 0;
+                left: 50%;
+                transform: translate(-50%,200%);
+                width: 100%;
+                height: 1px;
+                background-color: rgba($color: $gray, $alpha: 0.1);
+            }
+        }
+        &__payment{
+            background-color: #56C3C9;
+            border-radius: 1rem;
+            width:8rem;
+            height: 4rem;
+            color: $white;
+            @include flex(center,center);
+            @include desktop{
+                width:6rem;
+                height: 3rem;
+            }
+        }
+    }
+    &__btn{
+        color: $black;
+        font-weight: 600;
+        width: 100%;
+        border-radius: 0.4rem;
+        transition: all 0.3s ease;
+        padding: 0.4rem 0;
+        text-transform: capitalize;
+        &.view{
+            border: 1px solid $green;
+            background-color: rgba($color: $green, $alpha: 0.6);
+            &:hover{
+                cursor: pointer;
+                background-color: $green;
+            }
+        }
+        &.del{
+            border: 1px solid $red;
+            background-color: rgba($color: $red, $alpha: 0.7);
+            margin-top: 0.4rem;
+            &:hover{
+                cursor: pointer;
+                background-color: $red;
+            }
+        }
+    }
+}
+
+#no-result-history{
+    width: 100%;
+    text-align: center;
+    color: gray;
+    vertical-align: middle;
+    height: 45rem;
+    & > svg{
+        font-size: 5rem;
+    }
+    & > p{
+        font-size: 3rem;
+        font-weight: 600;
+        text-transform: capitalize;
+    }
+}
+@keyframes chopchop {
+    0%{
+        opacity: 0;
+    }
+    50%{
+        opacity: 1;
+    }
+    100%{
+        opacity: 0;
+    }
+}

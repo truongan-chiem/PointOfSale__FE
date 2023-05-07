@@ -1,0 +1,14 @@
+@use "../../sass/" as *;
+.tab-sub-sidebar{
+    width: 68%;
+    height: 89vh;
+    border-radius: 3rem;
+    overflow: auto;
+    @include desktop{
+        width: 100%;
+        margin-top: 9rem;
+    }
+    @include mobile {
+        margin-top: 7rem;
+    }
+}

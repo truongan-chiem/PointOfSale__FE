@@ -1,0 +1,89 @@
+@use '../../sass/' as *;
+
+.btn{
+    width: 30rem;
+    height: 5rem;
+    background-color: $main-color;
+    color: $white;
+    text-align: center;
+    font-size: 1.5rem;
+    border-radius: 0.8rem;
+    border: 1px solid $main-color;
+    text-transform: capitalize;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all .3s ease;
+    &:hover{
+        background-color: rgba($color: $main-color, $alpha: 0.2);
+        color: $main-color;   
+    }
+    &:active{
+        background-color: $main-color;
+        color: $main-bg;
+    }
+    &.disable{
+        background-color: rgba($color: $main-color, $alpha: 0.2);
+        border: none;
+        color : rgba($color: $black, $alpha: 0.2);
+        pointer-events: none;
+    }
+}
+.btn-shortcut{
+    width: 6rem;
+    height: 8rem;
+    @include flex(center,center);
+    flex-direction: column;
+    background-color: $white;
+    border-radius: 1rem;
+    border: 1px solid $white;
+    color: rgba($color: $black, $alpha: 0.4);
+    padding: 1rem 2rem;
+    transition: all 0.3s ease;
+    & > svg{
+        font-size: 2rem;
+    }
+    & > img{
+        width: 4rem;
+        height: 4rem;
+        border-radius: 50%;
+    }
+    & > p {
+        font-size: 1.2rem;
+        margin-top: 1rem;
+        font-weight: 600;
+        text-transform: capitalize;
+    }
+
+    &:hover{
+        background-color: rgba($color: $main-color, $alpha: 0.2);
+        border: 1px solid $main-color;
+        color: $main-color;
+        cursor: pointer;
+    }
+    &.active{
+        background-color: rgba($color: $main-color, $alpha: 0.2);
+        border: 1px solid $main-color;
+        color: $main-color;
+        cursor: pointer;
+    }
+    &:active{
+        background-color: $main-color;
+        color: $white;
+    }
+    &.disable{
+        background-color: rgba($color: $main-color, $alpha: 0.2);
+        color: #B0AEAF;
+        &:hover{
+            color: $main-color;
+        }
+    }
+    
+    &.activeNav{
+        background-color: $main-color;
+        color: $white;
+        & > img{
+            border: 1px solid $white;
+        }
+    }
+    
+}

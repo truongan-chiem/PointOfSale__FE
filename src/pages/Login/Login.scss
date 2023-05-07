@@ -1,0 +1,62 @@
+@use '../../sass/' as *;
+
+.login{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    @include flex(center,center);
+    animation: fadeIn 0.3s linear;
+   &__background{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background-image: url('../../asset/background.png');
+    background-repeat: repeat;
+    background-position: center;
+    filter: blur(1.5px);
+   }
+    &__form{
+        padding: 6rem 3rem;
+        flex-direction: column;
+        background-color: $white;
+        border-radius: 1.5rem;
+        box-shadow: rgba(0, 0, 0, 0.6) 0px 5px 15px;
+        @include flex(center,flex-start);
+        & > * ~ *{
+            margin-top: 3rem;
+        }
+        &__header{
+            font-size: 3rem;
+            font-weight: 700;
+            text-transform: capitalize;
+            color: $main-color;
+        }
+        &__input{
+            background-color: $main-bg;
+            width: 100%;
+            &.error{
+                & > label{
+                    color: red;
+                }
+                & > input{
+                    color: red;
+                }
+                border: 1px solid red;
+            }
+        }
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to{
+        opacity: 1;
+    }
+}

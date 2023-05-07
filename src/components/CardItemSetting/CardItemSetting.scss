@@ -1,0 +1,81 @@
+@use '../../sass/' as *;
+
+.card-item-setting{
+    @include flex(center,space-between);
+    flex-direction: column;
+    border: 1px solid rgba($color: $gray, $alpha: 0.1);
+    padding: 2rem 0;
+    border-radius: 4rem;
+    height: 30rem;
+    position: relative;
+    & > img{
+        width: 12rem;
+        height: 12rem;
+        border-radius: 50%;
+    }
+    &__name{
+        font-weight: 700;
+        text-transform: capitalize;
+        font-size: 2.2rem;
+        text-align: center;
+    }
+    &__price{
+        color: $main-color;
+        font-weight: 600;
+        font-size: 1.4rem;
+    }
+    &__btn{
+        background-color: rgba($color: $main-color, $alpha: 0.4);
+        border-radius: 1.5rem;
+        border: 1px solid transparent;
+        padding: 1rem;
+        color: $main-color;
+        font-size: 1.3rem;
+        transition: all 0.3s ease;
+        @include flex(center,center);
+        & > span{
+            text-transform: capitalize;
+            margin-left: 1rem;
+        }
+        &:hover{
+            background-color: $main-color;
+            color: $white;
+            cursor: pointer;
+        }
+    }
+    &__delete{
+        position: absolute;
+        top: 5%;
+        right: 5%;
+        font-size: 1.5rem;
+        color: $main-color;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        &:hover{
+            color: rgba($color: $main-color, $alpha: 0.5);
+        }
+    }
+}
+
+.card-add{
+    height: 30rem;
+    border-radius: 4rem;
+    border: 1px dashed $main-color;
+    color: $main-color;
+    cursor: pointer;
+    @include flex(center,center);
+    & > div{
+        flex-direction: column;
+        @include flex(center,flex-start);
+        font-size: 2rem;
+        font-weight: 700;
+        pointer-events: none;
+        & > svg {
+            margin-bottom: 2.2rem;
+        }
+        & > p{
+            text-transform: capitalize;
+            text-align: center;
+        }
+    }
+}

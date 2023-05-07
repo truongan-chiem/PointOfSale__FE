@@ -1,0 +1,64 @@
+@use '../../sass/' as *;
+
+.popupSearch{
+    background-color: $white;
+    position: absolute;
+    z-index: 50;
+    top: 110%;
+    right: 0;
+    width: 100%;
+    min-height: 10rem;
+    border-radius: 0.8rem;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    padding: 1rem 0;
+    &__header{
+        color: $main-color;
+        padding: 1rem 2rem;
+        font-size: 1.3rem;
+        font-weight: 600;
+    }
+    &__body{
+        max-height: 19rem;
+        overflow-y: overlay;
+        &::-webkit-scrollbar-track {
+            background: transparent;
+          }
+        &__noResult{
+            font-size: 2rem;
+            color: $main-color;
+            text-align: center;
+            font-weight: 600;
+        }
+          
+    }
+}
+
+.item{
+    border-top: 1px solid #ddd;
+    @include flex(center,flex-start);
+    padding: 1.2rem 2rem;
+    position: relative;
+    &__soldOut{
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        left: 1.5rem;
+        width: 7rem;
+    }
+    &__img{
+        width: 7rem;
+        border-radius: 50%;
+    }
+    &__info{
+        margin-left: 2rem;
+        &__name{
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+    }
+    &:hover{
+        background-color: #ddd;
+        transition: all 0.3s ease;
+        cursor: pointer;
+    }
+}

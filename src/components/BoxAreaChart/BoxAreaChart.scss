@@ -1,0 +1,20 @@
+@use '../../sass/' as *;
+
+.box-area-chart{
+    padding: 2rem 2rem 4rem 2rem;
+    grid-column: span 4 ;
+    @include desktop{
+        grid-column: span 2 ;
+    }
+    @include mobile{
+        grid-column: span 1 ;
+    }
+    height: 50rem;
+    @include mobile{
+        height: 30rem;
+    }
+    &__header{
+        margin-bottom: 2rem;
+        @include flex(center,space-between);
+    }
+}

@@ -1,0 +1,50 @@
+@use './sass/' as *;
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Oleo+Script+Swash+Caps:wght@700&display=swap');
+*{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+body{
+  font-family: 'Open Sans', sans-serif;
+  background-color: $main-bg;
+  overflow: overlay;
+}
+.container{
+  padding: 4rem 2rem;
+}
+html {
+  font-size: 62.5%;
+}
+ul{
+  list-style-type: none;
+}
+a{
+  text-decoration: none;
+}
+p,span,h1,h2,h3,h4,h5,h6{
+  pointer-events: none;
+}
+/* width */
+::-webkit-scrollbar {
+  width: 6px;
+ 
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: rgba($color: $main-color, $alpha: 0.6);
+  border-radius: 10px;
+
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: $main-color;
+}

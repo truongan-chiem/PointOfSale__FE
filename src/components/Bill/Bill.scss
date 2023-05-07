@@ -1,0 +1,196 @@
+@use '../../sass/' as *;
+
+
+.billPDF{
+    width: 50%;
+    border-radius: 1rem;
+    margin:  2rem auto;
+    padding: 2rem;
+    border: 1px solid $main-color;
+    .bill__payment{
+        @include flex(center,space-between);
+        flex-direction: row;
+        margin-top: 0;
+        h1{
+            margin-top: 2rem;
+            font-size: 2rem;
+            &::after{
+                content: "  :";
+            }
+        }
+    }
+    .bill__info__list-choose{
+        height: fit-content;
+        overflow: inherit;
+    }
+    .item-order-bill__info__about__action__amount > button{
+        display: none;
+    }
+    .item-order-bill__info__about__action__amount > h2{
+        color: $main-color;
+    }
+    .bill__payment__options{
+        display: none;
+    }
+    .billPDF__payment{
+        display: block;
+    }
+    .billPDF__day{
+        display: block;
+    }
+    .bill__info__header{
+        display: block;
+    }
+    .billPDF__cash{
+        display: block;
+    }
+}
+.billPDF__day{
+    display: none;
+}
+.billPDF__payment{
+    padding: 1rem 2rem;
+    background-color: #56C3C9;
+    border-radius: 1rem;
+    color: #fff;
+    border: none;
+    display: none;
+}
+.bill__info__header{
+    display: none;
+}
+.billPDF__cash{
+    display: none;
+}
+.bill{
+    background-color: $white;
+    border-radius: 2rem;
+    padding: 2rem;
+    width: 100%;
+    height: 100%;
+    @include flex(null,space-between);
+    flex-direction: column;
+    &__info{
+        & > * ~ * {
+            margin-top: 1rem;
+        }
+        &__header{
+            h3{
+                color: $gray;
+                font-weight: 600;
+            }
+            & > h1{
+                font-weight: 700;
+            }
+            margin-bottom: 1rem;
+        }
+        &__list-choose{
+            height: 20rem;
+            overflow: auto;
+            & >  * ~ * {
+                margin-top: 1rem;
+            }
+            & > .emptyOrder{
+                pointer-events: none;
+                height: 100%;
+                flex-direction: column;
+                @include flex(center,center);
+                color: rgba($color: $black, $alpha: 0.2);
+                font-size: 3.5rem;
+                & > span{
+                    margin-bottom: 5rem;
+                    font-weight: 700;
+                    text-align: center;
+                }
+                @include desktop{
+                    font-size: 2rem;
+                }
+            }
+        }
+        &__row{
+            @include flex(center,space-between);
+            &.tax{
+                color: rgba($color: $black, $alpha: 0.4);
+            }
+            &.total{
+              font-size: 1.5rem;
+              font-weight: 700;
+            }
+            &.cash{
+                font-size: 1.4rem;
+                margin-bottom: 1rem;
+            }
+            &.refunds{
+                font-size: 1.5rem;
+                margin-top: 1rem;
+
+            }
+        }
+        .divider{
+            border-top: 1px dashed rgba($color: $black, $alpha: 0.5);
+        }
+    }
+    &__payment{
+        flex-direction: column;
+        // margin-top: 3rem;
+        & > h1{
+            font-size: 3rem;
+            @include desktop{
+                font-size: 2rem
+            }
+        }
+        @include flex(center,null);
+        & > * ~ * {
+            margin-top: 2rem;
+        }
+        &__options{
+            @include flex(center,space-between);
+            & > * ~ *{
+                margin-left: 1rem;
+            }
+            & > button{
+                width: 10rem;
+            }
+            @include desktopLg{
+                & > button{
+                    width: 6rem;
+                }
+            }
+        }
+        &__printbill{
+            width: 100%;
+            margin-top: 1.5rem;
+        }
+    }
+}
+
+.modal-confirm{
+    & > * ~ *{
+        margin-top: 2rem;
+    }
+    & > h2{
+        font-size: 2rem;
+        text-transform: capitalize;
+        color: $main-color;
+    }
+    .errorMoney{
+        border-color: red;
+        & > input {
+            color: red;
+        }
+        & > label{
+            color: red;
+        }
+    }
+    & >  p{
+        color: red;
+        position: absolute;
+        bottom: 35%;
+        left: 3rem;
+    }
+    @include mobile{
+        & > button{
+            width: 100%;
+        } 
+    }
+}

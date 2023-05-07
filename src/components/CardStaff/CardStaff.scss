@@ -1,0 +1,56 @@
+@use '../../sass/' as *;
+
+.card-staff{
+    padding: 1rem 2rem;
+    @include flex(center,space-between);
+    border: 1px solid $main-color;
+    border-radius: 1rem;
+    
+    &__info{
+        @include flex(center,null);
+        & > img{
+            width: 5rem;
+            height: 5rem;
+            border-radius: 0.4rem;
+            @include desktop{
+                width: 3.5rem;
+                height: 3.5rem;
+            }
+        }
+        &__about{
+            margin-left: 2rem;
+            & > h3{
+                color: rgba($color: $black, $alpha: 0.2);
+                @include desktop{
+                    font-size: 0.8rem;
+                }
+            }
+            & > h2{
+                color: $black;
+                @include desktop{
+                    font-size: 1rem;
+                }
+            }
+        }
+    }
+
+   
+    &__noti{
+        font-size: 3rem;
+        position: relative;
+        cursor: pointer;
+        &::before{
+            position: absolute;
+            content: "";
+            width: 0.8rem;
+            height: 0.8rem;
+            background-color: red;
+            border-radius: 50%;
+            top: 5px;
+            right: 5px;
+        }
+        @include desktop{
+            display: none;
+        }
+    }
+}

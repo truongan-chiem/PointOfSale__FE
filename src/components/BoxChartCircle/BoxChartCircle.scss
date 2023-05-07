@@ -1,0 +1,21 @@
+@use '../../sass/' as *;
+
+.box-chart-circle{
+    padding: 2rem;
+    @include flex(null,null);
+    flex-direction: column;
+    &__chart{
+        position: relative;
+        flex: 1;
+        @include flex(center,center);  
+        &__total-income{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-90%);
+            color: $black;
+            font-weight: 700;
+            font-size: 5rem;
+        } 
+    }
+}

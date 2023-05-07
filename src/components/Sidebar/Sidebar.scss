@@ -1,0 +1,32 @@
+@use '../../sass/' as *;
+
+.sidebar{
+    height: 100%;
+    flex-direction: column;
+    @include flex(center,space-between);
+    padding: 2rem;
+    &__top{
+        &__logo{
+            font-family: 'Oleo Script Swash Caps', cursive;
+            font-size: 7rem;
+            font-weight: 700;
+            color: $main-color;
+            text-align: center
+        }
+        &__nav{
+            @include flex(null,null);
+            flex-direction: column;
+            & > * ~ * {
+                margin-top: 0.5rem;
+            }
+            button{
+                width: 8rem;
+            }
+        }
+    }
+    &__profile{
+        
+            width: 8rem;
+        
+    }
+}

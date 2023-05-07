@@ -1,0 +1,78 @@
+@use '../../sass/' as *;
+
+.form{
+    &__body{
+        margin: 2rem 0;
+        & > .iconBack{
+            position: absolute;
+            top: 0;
+            left: 2rem;
+            color: $main-color;
+            font-size: 3rem;
+            border: 3px solid $main-color;
+            border-radius: 50%;
+            padding: 0.2rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            &:hover{
+                color: rgba($color: $main-color, $alpha: 0.4);
+                border: 3px solid rgba($color: $main-color, $alpha: 0.4);
+            }
+        }
+    }
+    &__body > * ~ *{
+        margin-top: 2rem;
+    }
+    &__header{
+        text-align: center;
+        text-transform: capitalize;
+        font-weight: 700;
+        font-size: 2rem;
+        color: $main-color;
+
+    }
+    &__wrapInput{
+        @include flex(center,flex-start);
+        & > * ~ *{
+            margin-left: 2rem;
+        }
+        &__item{
+            flex: 1;
+        }
+    }
+    &__dropdown{
+        @include flex(null,null);
+        @include desktop{
+            flex-direction: column;
+            & > .dropdown{
+                margin-bottom: 2rem;
+            }
+        }
+    }
+    &__file{
+        @include flex(center,center);
+        flex-direction: column;
+        width: 100%;
+        background-color: $white;
+        border: 1px dashed $main-color;
+        border-radius: 2rem;
+        font-size: 2rem;
+        cursor: pointer;
+        & > input{
+            display: none;
+        }
+        
+        & > span{
+            margin-top: 1rem;
+            font-weight: 700;
+            text-align: center;
+            @include mobile{
+                font-size: 1.5rem;
+            }
+        }
+    }
+    &__btn{
+        @include flex(center,center)
+    }
+}

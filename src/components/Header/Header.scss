@@ -1,0 +1,75 @@
+@use '../../sass/' as *;
+
+.header{
+    @include flex(center,space-between);
+
+    
+    &__title{
+        font-weight: 700;
+        font-size: 3rem;
+        text-transform: capitalize;
+        @include desktopLg{
+            font-size: 2rem;
+        }
+        @include desktop{
+            font-size: 1.5rem;
+        }
+    }
+    &__right{
+        @include flex(center,flex-start);
+        &__search{
+            width:40rem;
+            position: relative;
+           
+            @include desktop{
+                width: fit-content;
+                &__input > .input__text{
+                    overflow: hidden;
+                    width: 0;
+                }
+                &__input.openSearch > .input__text{
+                    width: 20rem;
+                }
+                
+            }
+            @include mobile{
+                display: none;
+            }
+        }
+        &__cart{
+            font-size: 2rem;
+            margin-left: 2rem;
+            background-color: white;
+            width: 4rem;
+            height: 4rem;
+            border-radius: 0.5rem;
+            @include flex(center,center);
+            color: $main-color;
+            position: relative;
+            & > span{
+                position: absolute;
+                top: -10%;
+                right: -10%;
+                font-size: 1.2rem;
+                color: white;
+                background-color: $main-color;
+                border-radius: 50%;
+                padding: 0.05rem 0.4rem;
+                @include flex(center,center);
+            }
+        }
+    }
+    
+}
+.loadingSearch{
+    animation: loading 1s infinite;
+}
+
+@keyframes loading {
+    from {
+        transform: rotate(0);
+    }
+    to{
+        transform: rotate(360deg);
+    }
+}

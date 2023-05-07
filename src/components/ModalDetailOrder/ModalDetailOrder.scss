@@ -1,0 +1,248 @@
+@use '../../sass/' as *;
+
+.detail-order{
+    min-height: fit-content;
+    min-width: 60%;
+    &__header{
+        font-weight: 800;
+        font-size: 2.5rem;
+        @include mobile{
+            font-size: 1.4rem;
+        }
+        & > span{
+            color: $main-color;
+        }
+    }
+    &__staff{
+        & > h3{
+            font-size: 2.2rem;
+            @include mobile{
+                font-size: 1.4rem;
+            }
+            color: rgba(117, 117, 117, 0.5);
+            position: relative;
+            &::after{
+                content: "";
+                position: absolute;
+                bottom: -1rem;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 100%;
+                height: 1px;
+                background-color: rgba(117, 117, 117, 0.5);
+            }
+        }
+        &__info{
+            margin-top: 2rem;
+            @include flex(center,null);
+            & > :first-child{
+                width: 50%;
+                & > * ~ * {
+                    margin-top: 1rem;
+                }
+                & > div {
+                    line-height: 1.8rem;
+                    & > p {
+                        font-size: 1.2rem;
+                        color: rgba(117, 117, 117, 0.5);
+                    }
+                    & > h4{
+                        font-size: 1.6rem;
+                        text-transform: capitalize;
+                    }
+                }
+            }
+            &__img{
+                flex: 1;
+                @include flex(center,center);
+                height: 12rem;
+                & > img{
+                    width: 12rem;
+                    border-radius: 50%;
+                    height: 100%;
+                    border: 1px solid gray;
+                }
+            }
+        }
+    }
+    &__invoice{
+        & > h3{
+            font-size: 2.2rem;
+            @include mobile{
+                font-size: 1.4rem;
+            }
+            color: rgba(117, 117, 117, 0.5);
+            position: relative;
+            &::after{
+                content: "";
+                position: absolute;
+                bottom: -1rem;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 100%;
+                height: 1px;
+                background-color: rgba(117, 117, 117, 0.5);
+            }
+        }
+        &__info{
+            margin-top: 2rem;
+            @include flex(center,space-between);
+            &__issued{
+                & > p {
+                    font-size: 1.2rem;
+                    color: rgba(117, 117, 117, 0.5);
+                }
+                & > h4{
+                    font-size: 1.6rem;
+                    text-transform: capitalize;
+                    @include mobile{
+                        font-size: 1.2rem
+                    }
+                }
+            }
+            &__payment{
+                @include flex(center,center);
+                & > h4 {
+                    font-size: 1.6rem;
+                    @include mobile{
+                        font-size: 1.3rem;
+                    }
+                }
+                & > div{
+                    background-color: #56C3C9;
+                    border-radius: 1rem;
+                    width:8rem;
+                    height: 4rem;
+                    color: $white;
+                    @include flex(center,center);
+                    font-size: 1.4rem;
+                    margin: 0 2rem;
+                    @include mobile{
+                        width: 6rem;
+                        height: 3rem;
+                        border-radius: 0.5rem;
+                        margin: 0 0.5rem;
+                    }
+                }
+            }
+        }
+       
+
+        & > table{
+            width: 100%;
+            margin-top: 1rem;
+            thead,tbody,tfoot,tr,td{
+                display: block;
+            }
+            & > thead{
+                & > tr {
+                    display: flex;
+                    justify-content: space-between;
+                    border-top: 1px solid #ddd;
+                    border-bottom: 1px solid #ddd;
+
+                    & > th:nth-child(1){
+                        width: 20%;
+                    }
+                    & > th:nth-child(2){
+                        width: 20%;
+                    }
+                    & > th:first-child{
+                        text-align: start;
+                    }
+                    & > th:last-child{
+                        text-align: end;
+                    }
+                    & > th{
+                        float:left;
+                        padding: 1rem;
+                        font-size: 1.5rem;
+                        font-weight: 500;
+                        color: #B7B8BB;
+                    }
+                }
+            }
+           
+            & > tbody{
+                height: 12rem;
+                @include mobile{
+                    height: 6rem;
+                }
+                overflow-y: overlay;
+                
+                width: 100%;
+                & > tr{
+                    text-align: center;
+
+                    display: flex;
+                    justify-content: space-between;
+                    & > td:nth-child(1){
+                        width: 20%;
+
+                    }
+                    & > td:nth-child(2){
+                        width: 20%;
+                    }
+                    & > td{
+                        word-break: break-word;
+                        float: left;
+                        padding: 1rem;
+                        font-size: 1.5rem;
+                        font-weight: 500;
+                        color: $black;
+                        @include mobile{
+                            font-size: 1.2rem;
+                            & > div.price{
+                                font-size: 1.2rem;
+                            }
+                        }
+                    }
+                }
+            }
+            & > tfoot{
+                & > tr{
+                    text-align: center;
+                    display: flex;
+                    justify-content: space-between;
+                    border-top: 1px solid #ddd;
+
+                    & > td:first-child{
+                        text-align: start;
+                    }
+                    & > td:last-child{
+                        text-align: end;
+                    }
+                    & > td{
+                        padding: 1rem;
+                        font-size: 1.1rem;
+                        font-weight: 600;
+                        color: $black;
+                    }
+                }
+                @include mobile{
+                    & > tr > td{
+                        font-size: 1.2rem !important;
+                        & > div.price{
+                            font-size: 1.2rem;
+                        }
+                    }
+                }
+            }
+
+            & >  tfoot:nth-child(5),tfoot:nth-child(6),tfoot:last-child{
+                & > tr{
+                    border-bottom: 1px solid #ddd;
+
+                    & > td{
+                        font-size: 2rem;
+                        
+                    }
+                } 
+            }
+           
+           
+        }
+    }
+   
+}
+

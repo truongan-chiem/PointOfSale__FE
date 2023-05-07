@@ -1,0 +1,46 @@
+@use '../../sass/' as *;
+
+.select-option{
+    &__title{
+        font-size: 2rem;
+        font-weight: 700;
+        text-transform: capitalize
+    }
+    &__body{
+        margin-top: 1rem;
+        @include flex(center,flex-start);
+        & > * ~ * {
+            margin-left: 1rem;
+        }
+        &__btn{
+            cursor: pointer;
+            @include flex(center,center);
+            text-transform: capitalize;
+            border: 1px solid rgba($color: $main-color, $alpha: 0.2);
+            background-color: $main-bg;
+            width: 4rem;
+            height: 4rem;
+            border-radius: 50%;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            & > svg{
+                width: 3rem;
+                height: 3rem;
+            }
+            &.active{
+                border: 2px solid rgba($color: $main-color, $alpha: 0.7);
+            }
+            &.percent{
+                &:first-child{
+                    color:#FD965D
+                }
+                &:nth-child(2){
+                    color: $main-color;
+                }
+                &:last-child{
+                    color: #FD7070;
+                }
+            }
+        }
+    }
+}

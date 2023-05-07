@@ -1,0 +1,42 @@
+@use '../../sass/' as *;
+
+.modal-delete{
+    @include flex(center,center);
+    & > * ~*{
+        margin-top: 2rem;
+    }
+    flex-direction: column;
+    & > h1{
+        font-size: 4rem;
+        font-weight: 700;
+        color: $main-color;
+
+        @include desktop{
+            font-size: 2rem;
+        }
+        @include mobile{
+            font-size: 1.4rem;
+        }
+    }
+    & > p{
+        font-size: 2rem;
+        font-weight: 600;
+        @include desktop{
+            font-size: 1.5rem;
+        }
+        @include mobile{
+            font-size: 1.2rem;
+        }
+    }
+    &__wrapBtn{
+        @include flex(center, flex-start);
+        & > * ~ *{
+            margin-left: 2rem;
+        }
+        @include mobile{
+            & > .btn{
+                width: 12rem;
+            }
+        }
+    }
+}
