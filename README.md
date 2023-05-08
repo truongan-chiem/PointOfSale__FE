@@ -5,7 +5,7 @@ Front-End is built on top of [ReactJs](https://github.com/facebook/create-react-
 Back-End is built on top of [Nodejs](https://nodejs.org/).
 ## Introduction
 
-Website to support coffee shop management
+Website to support management
 
 ### `npm start`
 
@@ -24,78 +24,105 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
 ![image](https://user-images.githubusercontent.com/71972212/236762358-38a7cb77-905a-4b00-a3e3-1e8c92bc0ab1.png)
 
-**Menu**
+You can filter of type example : Laptop, PC , Phone, Audio,...
+- Filter Laptop
 
-![Screenshot (1715)](https://user-images.githubusercontent.com/71972212/220283404-b27a2cac-1134-48b7-a45a-a97537b94fc4.png)
-
-You can filter of type example : Coffee, Juice , Milk, Snack,...
-- Filter Coffee
-
-![Screenshot (1716)](https://user-images.githubusercontent.com/71972212/220283879-978b85fc-73ac-41f7-8800-c3322d03ab5b.png)
+![image](https://user-images.githubusercontent.com/71972212/236776510-cb4e82c0-aa70-4956-a4be-8f246ce2692d.png)
 
 
-- Filter Snack
+- Filter Phone
 
-![Screenshot (1717)](https://user-images.githubusercontent.com/71972212/220284028-2090d52c-1283-49bf-8ed8-b4a9b519492a.png)
+![image](https://user-images.githubusercontent.com/71972212/236776603-d1cdc23c-328c-4f2b-92e2-66d4f4a7c1f8.png)
 
-**Order**
-+ Without Order
 
-![Screenshot (1718)](https://user-images.githubusercontent.com/71972212/220284215-b17a39fd-5bc9-4a1f-9dee-c42bef91f3eb.png)
+- Add Item to Bill
 
-+ With Order
+![image](https://user-images.githubusercontent.com/71972212/236776774-799ffcdf-0975-46d8-9f97-ee415c2d8e91.png)
 
-![Screenshot (1721)](https://user-images.githubusercontent.com/71972212/220284420-3b0795ec-f4f7-43a7-bc7f-4c81d356500a.png)
+- Print Bill in PDF
+
+![image](https://user-images.githubusercontent.com/71972212/236776903-a555afac-2a24-442f-a6ad-276a855d8845.png)
+
+- Search Product
+
+![image](https://user-images.githubusercontent.com/71972212/236777067-50ddfc6e-4b7b-4299-acef-a91babad5e86.png)
+
+**Statistic**
+
+![image](https://user-images.githubusercontent.com/71972212/236777142-ac8b86f2-30bb-4cf8-a808-9b1ec8e82c2f.png)
+
+- Change range time to display chart and statistic
+
+![image](https://user-images.githubusercontent.com/71972212/236777350-ab1789b2-856b-4e20-b8dc-e9a19996d94c.png)
+
+- Trending Product and Out of Stock Product
+
+![image](https://user-images.githubusercontent.com/71972212/236777501-f2efb9e8-08a0-42ae-9628-d745ab3698d7.png)
+
+- Click View All to see Detail Products
+
+![image](https://user-images.githubusercontent.com/71972212/236777599-258f4df3-41fa-4b48-8326-57a189876f07.png)
 
 **History**
 
-![Screenshot (1722)](https://user-images.githubusercontent.com/71972212/220284521-5d2ee42d-54da-46d3-9855-5f6f633f8812.png)
+![image](https://user-images.githubusercontent.com/71972212/236777697-a26699f1-4708-42bb-b5b6-fe69a838f988.png)
 
-**Setting**
-- Field Menu
-*Edit,Delete and Add new dish*
+- Click Action to see detail order or delete.
 
-![Screenshot (1723)](https://user-images.githubusercontent.com/71972212/220285906-5c684e8a-ab33-4109-9cc0-489e2cb8efda.png)
+![image](https://user-images.githubusercontent.com/71972212/236777829-de3341ca-9992-4df0-a682-07388bcb1fa9.png)
+
+- Detail Order
+
+![image](https://user-images.githubusercontent.com/71972212/236777882-40e80b4e-20c6-4bf3-9f0a-059580fd7a51.png)
+
+- Delete Order
+
+![image](https://user-images.githubusercontent.com/71972212/236777942-482b4b0a-7a06-4335-8519-fee9ab23af19.png)
+
+**Manage**
+
+- Field Products
+*Edit,Delete and Add new product*
+
+![image](https://user-images.githubusercontent.com/71972212/236778029-facc930a-4c80-4864-9731-1d97fe96ff68.png)
 
 + Add
 
-![Screenshot (1727)](https://user-images.githubusercontent.com/71972212/220314295-be7a45b8-ef0a-4552-86b4-5736ea154c56.png)
-
-![Screenshot (1728)](https://user-images.githubusercontent.com/71972212/220314585-b1b72cf4-fd20-4ecb-b623-97ad07a5d72c.png)
+![image](https://user-images.githubusercontent.com/71972212/236778207-bb5b245a-b59e-4730-ba68-95bd4c396eef.png)
 
 + Edit
 
-![Screenshot (1729)](https://user-images.githubusercontent.com/71972212/220314684-59ce223e-ed03-437b-9fed-e013b09dcc98.png)
+![image](https://user-images.githubusercontent.com/71972212/236778250-c43d6477-1719-4a5f-995b-da05895ddb53.png)
 
 + Delete
 
-![Screenshot (1730)](https://user-images.githubusercontent.com/71972212/220314788-80fe694f-b261-496b-8731-3ba801cb463c.png)
+![image](https://user-images.githubusercontent.com/71972212/236778301-a884744e-5f3d-4c01-943c-94203f9485bb.png)
 
 - Field Account (Role Admin)
 *Only role admin - Edit,Delete and Add*
 
-![Screenshot (1724)](https://user-images.githubusercontent.com/71972212/220286206-f0d8839f-d02f-4d31-b270-2a53128e5f51.png)
+![image](https://user-images.githubusercontent.com/71972212/236778427-cdfe6986-9b48-4e47-b12e-7eae1c842316.png)
 
 + Add
 
-![Screenshot (3)](https://user-images.githubusercontent.com/71972212/221401753-6d004892-eafe-43fb-b52c-03844c1a41e6.png)
+![image](https://user-images.githubusercontent.com/71972212/236778475-9b22b69a-5b4f-4f03-9304-4a5a9968329b.png)
 
 + Edit
   
-![Screenshot (4)](https://user-images.githubusercontent.com/71972212/221401767-e0f0084b-4601-4166-b5c2-d4e0622d2478.png)
+![image](https://user-images.githubusercontent.com/71972212/236778507-e58485a4-8166-4470-9b76-b546150e7dc1.png)
 
 + Delete
   
-![Screenshot (5)](https://user-images.githubusercontent.com/71972212/221401779-0eaa1762-c19e-4ca9-a6b2-9d560684d307.png)
+![image](https://user-images.githubusercontent.com/71972212/236778553-89dedeb3-5a4d-47f7-aeb1-1a5a225b2f40.png)
 
 **Profile**
 - Tag Edit Information.
 
-![Screenshot (1725)](https://user-images.githubusercontent.com/71972212/220286451-cde68631-3505-4c39-a84b-72cacf3b5b98.png)
+![image](https://user-images.githubusercontent.com/71972212/236778607-f21f0a1a-8431-48d2-8eb9-7517648ca363.png)
 
 - Tag Update Password.
 
-![Screenshot (1726)](https://user-images.githubusercontent.com/71972212/220286561-0ac4ed59-1fbd-4648-828a-7413e43229db.png)
+![image](https://user-images.githubusercontent.com/71972212/236778638-1bf936f1-2127-4ed6-b471-28332c7344db.png)
 
 - Logout.
 
