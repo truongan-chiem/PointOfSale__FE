@@ -1,12 +1,18 @@
 @use '../../sass/' as *;
 
 .history{
+    padding-bottom: 1rem !important;
     &__box{
         padding: 2rem;
         margin-top: 1rem;
     }
     &__header{
         @include flex(center,space-between);
+        @include mobile{
+            h1{
+                font-size: 2rem;
+            }
+        }
     }
     &__body{
         width: 100%;
@@ -21,9 +27,35 @@
             animation: chopchop 1s infinite;
         }
         & > table{
-            & > tr{
+            thead{
+                display: table;
+                width: 100%;
+                table-layout: fixed;
+            }
+            tbody{
+                overflow-y: auto;
+                overflow-x: hidden;
+                display: block;
+                @include desktop{
+                    height: 79vh;
+                }
+                @include tablet{
+                    height: 76vh;
+                }
+                @include mobile{
+                    height: 68vh;
+                }
+                @include mobile-small{
+                    height: 66vh;
+                }
+                height: 60vh;
+            }
+            tr{
+                display: table;
+                width: 100%;
+                table-layout: fixed;
                 position: relative;
-                & > th{
+                th{
                     text-align: start;
                     font-size: 2rem;
                     padding: 1rem;
@@ -33,9 +65,15 @@
                     @include desktop{
                         font-size: 1rem;
                     }
+                    &:first-child{
+                        width: 30%;
+                    }
                 }
-                & > td{
+                td{
                     padding: 1rem;
+                    &:first-child{
+                        width: 30%;
+                    }
                     & > .iconMore{
                         @include flex(center,center);
                         & > svg{
@@ -45,14 +83,21 @@
                     @include desktop{
                         font-size: 1.1rem;
                     }
-                }
-                & > td > .history__price{
-                    color: black ;
-                    font-weight: 400;
-                    @include desktop{
-                       font-size: 1rem;
+                    & > .history__price{
+                        color: black ;
+                        font-weight: 400;
+                        @include desktop{
+                           font-size: 1rem;
+                        }
                     }
                 }
+                // td > .history__price{
+                //     color: black ;
+                //     font-weight: 400;
+                //     @include desktop{
+                //        font-size: 1rem;
+                //     }
+                // }
             }
             & > * ~ *::after{
                 position: absolute;

@@ -163,34 +163,3 @@
         }
     }
 }
-
-.modal-confirm{
-    & > * ~ *{
-        margin-top: 2rem;
-    }
-    & > h2{
-        font-size: 2rem;
-        text-transform: capitalize;
-        color: $main-color;
-    }
-    .errorMoney{
-        border-color: red;
-        & > input {
-            color: red;
-        }
-        & > label{
-            color: red;
-        }
-    }
-    & >  p{
-        color: red;
-        position: absolute;
-        bottom: 35%;
-        left: 3rem;
-    }
-    @include mobile{
-        & > button{
-            width: 100%;
-        } 
-    }
-}

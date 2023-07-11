@@ -2,7 +2,6 @@ import React, { forwardRef, useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useReactToPrint } from "react-to-print";
 
-import { HiCreditCard } from "react-icons/hi";
 import { BsCash } from "react-icons/bs";
 import { RiQrScan2Line } from "react-icons/ri";
 import { FaRegSadCry } from "react-icons/fa";
@@ -11,14 +10,13 @@ import ItemOrderBill from "../ItemOrderBill/ItemOrderBill";
 import CardStaff from "../CardStaff/CardStaff";
 import Price from "../Price/Price";
 import Button from "../Button/Button";
-import Modal from '../Modal/Modal'
-import Input from '../Input/Input'
+
 
 import { clearBill, printBill } from "../../redux/Slice/productSlice";
 
 import "./Bill.scss";
-import { formatNumber } from "../../utils/formatCurrency";
 import useWindowSize from "../../hook/useWindowSize";
+import ModalConfirm from "../ModalConfirm/ModalConfirm";
 
 const Bill = (props,ref) => {
   const { order = [], type, valueOptionPayment = 0 } = props;
@@ -33,10 +31,6 @@ const Bill = (props,ref) => {
     {
       display: "Cash",
       icon: <BsCash />,
-    },
-    {
-      display: "Debit Card",
-      icon: <HiCreditCard />,
     },
     {
       display: "E-Wallet",
@@ -59,6 +53,7 @@ const Bill = (props,ref) => {
       setOpenConfirm(false);
       dispatch(clearBill());
       setMoney();
+      setOptionPayment(0);
     }
   });
 
@@ -67,8 +62,6 @@ const Bill = (props,ref) => {
       const result = await dispatch(printBill({optionPayment:optionPayment,cash : Number(money.replaceAll('.',''))})).unwrap();
       if(result){
         setIdOrder(result._id)
-        
-        setOptionPayment(0);
       }
     
   };
@@ -204,40 +197,10 @@ const Bill = (props,ref) => {
       totalAmount = {total} 
       money = {money}
       setMoney = {setMoney}
+      optionPayment = {optionPayment}
       /> }
     </div>
   );
 };
 
 export default forwardRef(Bill);
-
-const ModalConfirm = ({handlePrintBill,setOpenConfirm,totalAmount ,money , setMoney}) =>{
-
-  const [messError, setMessError] = useState()
-  const handleConfirm = () =>{
-    
-    if(Number(money.replaceAll('.',''))  < Number(totalAmount) ){
-      console.log('khong du tien');
-      setMessError("Not Enough Money!!!")
-    }
-    else{
-      handlePrintBill();
-      setMessError()
-     
-    }
-  }
-  return(
-    <Modal className={'modal-confirm'} onClose={() => setOpenConfirm(false)}>
-      <h2>Enter money</h2>
-      <Input
-          onChange={e=> setMoney(formatNumber(e.target.value))}
-          value={money}
-          left = {"1rem"}
-          placeholder={"Enter Money"}
-          className = {messError ? 'errorMoney' : ''}
-        />
-        {messError && <p>{messError}</p>}
-        <Button onClick={handleConfirm}>Confirm</Button>
-    </Modal>
-  )
-}

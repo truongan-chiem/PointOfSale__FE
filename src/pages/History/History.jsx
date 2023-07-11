@@ -47,6 +47,8 @@ const History = () => {
             <div className="history__body__loading">is Loading ...</div>
           ) : (
             <table width={'100%'}>
+              <thead>
+
                 <tr>
                   {width >= 768 && <th>Order ID</th>}
                   <th>Staff</th>
@@ -55,6 +57,9 @@ const History = () => {
                   {width >= 768 && <th>Payment</th>}
                   <th>Action</th>
                 </tr>
+              </thead>
+              <tbody>
+
                 {listData.length > 0 ? (
                   listData.map((item, index) => {
                     const totalAmount = item.orders.reduce(
@@ -100,6 +105,8 @@ const History = () => {
                     </td>
                   </tr>
                 )}
+              </tbody>
+
             </table>
           )}
         </div>

@@ -32,7 +32,7 @@ const Profile = () => {
     },
     {
       icon: <IoLockOpen />,
-      title: "Login & password",
+      title: "Change Password",
     },
     {
       icon: <BiLogOut />,

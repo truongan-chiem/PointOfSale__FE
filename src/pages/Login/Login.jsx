@@ -55,7 +55,7 @@ const Login = () => {
       {isLoading && <Loading />}
       <div className="login__background"></div>
       <form className="login__form" onSubmit={(e) => handleSubmit(e)}>
-        <h1 className="login__form__header">Login &amp; chill</h1>
+        <h1 className="login__form__header">Login</h1>
         <Input
           value={formData.account}
           onChange={(e) => setFormData((prev) => ({ ...prev, account: e.target.value }))}

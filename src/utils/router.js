@@ -9,6 +9,7 @@ import Profile from '../pages/Profile/Profile'
 import NotSupport from '../pages/NotSupport'
 import Layout from '../components/Layout/Layout'
 import Login from '../pages/Login/Login'
+import ConfirmQRCode from '../pages/ConfirmQRCode/ConfirmQRCode'
 
 const Router = () => {
   const location = useLocation();
@@ -36,6 +37,7 @@ const Router = () => {
           <Route  path='/history' element ={<History />}  /> 
           <Route  path='/manage' element ={<Manage  />}  /> 
           <Route  path='/profile' element ={<Profile />}  /> 
+          <Route  path='/qrcode' element ={<ConfirmQRCode />}  /> 
           <Route  path='*' element ={<NotSupport />}  /> 
         </Route>
 
@@ -62,9 +64,19 @@ const PublicRoute = () => {
 const PrivateRoute = () => {
   // const isLogin = useSelector(state => state.user.information)
   const isLogin = auth();
+  const location = useLocation();
+  
+  const returnPage = () =>{
+    if(location.pathname === '/qrcode'){
+      return <Outlet />
+    }
+    else{
+      return <Layout> <Outlet /></Layout>
+    }
+  }
   return(
     <>
-    {isLogin ? <Layout> <Outlet /></Layout> : <Navigate to={'/login'}/>}
+    {isLogin ? returnPage() : <Navigate to={'/login'}/>}
     </>
   )
 }
