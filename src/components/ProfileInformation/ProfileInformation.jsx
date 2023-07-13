@@ -145,7 +145,7 @@ const ProfileInformation = () => {
       </div>
       <div className="profile__tab__splitField">
         <Input
-          placeholder="location"
+          placeholder="nationality"
           className={`profile__tab__input ${error?.location && "errorInput"}`}
           left={"1rem"}
           {...register("location")}
