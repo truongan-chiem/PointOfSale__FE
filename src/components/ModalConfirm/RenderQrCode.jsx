@@ -1,26 +1,26 @@
 import { useEffect } from "react";
 import { BsQrCode } from "react-icons/bs";
 import QRCode from "react-qr-code";
-import { io } from "socket.io-client";
+// import { io } from "socket.io-client";
 import { formatNumber } from "../../utils/formatCurrency";
 
-const socket = io(process.env.REACT_APP_API);
+// const socket = io(process.env.REACT_APP_API);
 
 export const RenderQrCode = ({setOpenConfirm,handleConfirm,setMoney,totalAmount}) => {
 
-    useEffect(() => {
-        const listener = (data) =>{
-            console.log(data);
-            setOpenConfirm(false);
-            handleConfirm();
-        }
+    // useEffect(() => {
+    //     const listener = (data) =>{
+    //         console.log(data);
+    //         setOpenConfirm(false);
+    //         handleConfirm();
+    //     }
 
-        socket.on("finished",listener)
+    //     socket.on("finished",listener)
 
-        return () =>{
-            socket.off("finished",listener)
-        }
-    }, [handleConfirm,setOpenConfirm])
+    //     return () =>{
+    //         socket.off("finished",listener)
+    //     }
+    // }, [handleConfirm,setOpenConfirm])
     
     useEffect(() => {
         setMoney(formatNumber(String(totalAmount)))
