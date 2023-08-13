@@ -14,7 +14,7 @@ const socketSlice = createSlice({
   initialState,
   reducers : {
     connectSocket : (state) =>{
-        state.socket = io(process.env.REACT_APP_API)
+        state.socket = io(process.env.REACT_APP_API , {transports : ['websocket']})
     }
   },
 });
