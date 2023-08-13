@@ -29,7 +29,7 @@ const CardItemMenu = ({_id, name, desc, image, price , quantity ,tabIndex }) => 
         </div>
       </div>
       <div className="card-item-menu__btn">
-        <Button onClick={handleAddOrder} style = {quantity <= 0 ? {background: "gray"} : {}} disabled = {quantity <= 0}>Add to Billing</Button>
+        <Button onClick={handleAddOrder} style = {quantity <= 0 ? {background: "gray"} : {}} disabled = {quantity <= 0}>Add to Bill</Button>
       </div>
     </div>
   );

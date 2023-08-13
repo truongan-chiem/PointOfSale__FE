@@ -6,6 +6,7 @@ import userSlice from "./Slice/userSlice";
 import historySlice from "./Slice/historySlice";
 import statisticSlice from "./Slice/statisticSlice";
 import toggleBillSlice from "./Slice/toggleBillSlice";
+import socketSlice from "./Slice/socketSlice";
 
 const rootReducers = {
   products : productSlice,
@@ -15,6 +16,7 @@ const rootReducers = {
   statistic : statisticSlice,
   user : userSlice,
   toggleBill : toggleBillSlice,
+  socket : socketSlice,
 }
 
 export const store = configureStore({

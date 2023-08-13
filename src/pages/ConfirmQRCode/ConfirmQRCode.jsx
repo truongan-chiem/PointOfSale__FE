@@ -2,16 +2,16 @@ import React, { useEffect } from 'react'
 import logo from '../../asset/logo.png'
 import './ConfirmQRCode.scss'
 import {BsCheckCircle} from 'react-icons/bs'
-// import { io } from 'socket.io-client'
+import { useSelector } from 'react-redux'
 
-// const socket = io(process.env.REACT_APP_API);
 const ConfirmQRCode = () => {
-
+  const socket = useSelector(state => state.socket.socket)
+  
   useEffect(() => {
 
-    // socket.emit("thanh toan" , {message : "finshed!"})
+    socket.emit("thanh toan" , {message : "finshed!"})
     
-  }, [])
+  }, [socket])
   
 
   return (

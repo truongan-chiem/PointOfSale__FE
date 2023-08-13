@@ -37,12 +37,12 @@ const Router = () => {
           <Route  path='/history' element ={<History />}  /> 
           <Route  path='/manage' element ={<Manage  />}  /> 
           <Route  path='/profile' element ={<Profile />}  /> 
-          <Route  path='/qrcode' element ={<ConfirmQRCode />}  /> 
           <Route  path='*' element ={<NotSupport />}  /> 
         </Route>
 
         {/* public router */}
         <Route element = {<PublicRoute />} >
+          <Route  path='/qrcode' element ={<ConfirmQRCode />}  /> 
           <Route path='/login'   element = {<Login />}/>
         </Route>
 
