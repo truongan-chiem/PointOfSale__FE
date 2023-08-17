@@ -1,4 +1,4 @@
-import React, { useEffect, useId, useState } from "react";
+import React, { useCallback, useEffect, useId, useState } from "react";
 import { BsPencilFill, BsFillPersonFill } from "react-icons/bs";
 import { BiLogOut } from "react-icons/bi";
 import { IoLockOpen } from "react-icons/io5";
@@ -17,7 +17,7 @@ import Modal from "../../components/Modal/Modal";
 import useFilePreview from "../../hook/useFIlePreview";
 import { fetchImg } from "../../utils/fetchImage";
 import Button from "../../components/Button/Button";
-import { resetError, updateAccount } from "../../redux/Slice/accountSlice";
+import { updateAccount } from "../../redux/Slice/accountSlice";
 import Loading from "../../components/Loading/Loading";
 import { Notificationz } from "../../components/Notification/Notification";
 
@@ -97,8 +97,7 @@ const EditImg = ({ url, setEditImage ,userId}) => {
   const [filePreview] = useFilePreview(fileImage, "single");
   const dispatch = useDispatch()
   const isLoading = useSelector(state => state.account.createAcc.isLoading)
-  const error = useSelector(state =>  state.account.createAcc.error)
-  const [curError, setCurError] = useState(error)
+  const [curError, setCurError] = useState("")
 
   useEffect(() => {
     fetchImg(url)
@@ -107,31 +106,18 @@ const EditImg = ({ url, setEditImage ,userId}) => {
   }, [url]);
 
   useEffect(() => {
-    setCurError(error)
-  }, [error])
-  
-
-  useEffect(() => {
-    if(curError === ""){
-      Notificationz("Update Success!!!","success");
-      setEditImage(false)
-      dispatch(updateImage(filePreview))
-    }
-    else if(curError !== null){
+    if(curError){
       Notificationz(curError,"error");
     }
-    return () =>{
-      dispatch(resetError())
-    }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [curError,dispatch,setEditImage])
-  
-
+  }, [curError])
+  const handleUpdateAvatar = useCallback(() => {
+      dispatch(updateImage(filePreview))
+  },[filePreview,dispatch])
   const handleSave = () =>{
     const data = new FormData()
     if(fileImage.type.slice(0,5) === "image"){
       data.append("image",fileImage)
-      dispatch(updateAccount({id : userId,dataForm : data}))
+      dispatch(updateAccount({id : userId,dataForm : data , setToggleForm : setEditImage , handleUpdateAvatar}))
     }
     else{
       setCurError("File Image Invalid!!!")

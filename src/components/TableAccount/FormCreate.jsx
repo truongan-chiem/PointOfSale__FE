@@ -8,7 +8,7 @@ import Button from "../Button/Button";
 import Input from "../Input/Input";
 import { Notificationz } from "../Notification/Notification";
 import { useDispatch, useSelector } from "react-redux";
-import { createAccount, resetError, updateAccount } from "../../redux/Slice/accountSlice";
+import { createAccount, updateAccount } from "../../redux/Slice/accountSlice";
 import Loading from "../Loading/Loading";
 import { fetchImg } from "../../utils/fetchImage";
 import useFilePreview from "../../hook/useFIlePreview";
@@ -71,7 +71,6 @@ const FormCreate = ({ setToggleForm, dataEdit }) => {
 
   const dispatch = useDispatch();
   const isLoading = useSelector((state) => state.account.createAcc.isLoading);
-  const errorAPI = useSelector((state) => state.account.createAcc.error);
 
   //preview file image
   const file = watch(["image"]);
@@ -84,21 +83,6 @@ const FormCreate = ({ setToggleForm, dataEdit }) => {
       }
     });
   }, [errors]);
-
-  useEffect(() => {
-    if (errorAPI) {
-      Notificationz(errorAPI, "error");
-    } else if (errorAPI === "") {
-      Notificationz("Success!!!");
-      setToggleForm(false);
-    }
-  }, [errorAPI,setToggleForm]);
-
-  useEffect(() => {
-    return () => {
-      dispatch(resetError());
-    };
-  }, [dispatch]);
 
   // thêm các giá trị vào các field trong trường hợp form Edit
   useEffect(() => {
@@ -129,13 +113,12 @@ const FormCreate = ({ setToggleForm, dataEdit }) => {
     dataForm.append("role", formData.selectType === 'staff' ? 0 : formData.selectType === 'manager' ? 1 : 2 );
     dataForm.append("image", data.image[0]);
     if(dataEdit){
-      console.log(dataEdit);
-      dispatch(updateAccount({id :dataEdit._id , dataForm }))
+      dispatch(updateAccount({id :dataEdit._id , dataForm ,setToggleForm}))
     }
     else{
       dataForm.append("account", data.account);
       dataForm.append("password", data.password);
-      dispatch(createAccount(dataForm));
+      dispatch(createAccount({dataForm,setToggleForm}));
     }
 
   };

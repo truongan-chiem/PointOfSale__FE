@@ -1,0 +1,35 @@
+@use '../../sass/' as *;
+
+.pagination{
+    @include flex(center,center);
+    & > * ~ *{
+        margin-left: 1rem;
+    }
+    &__btn{
+        @include flex(center,center);
+        font-size: 2rem;
+        width: 4.5rem;
+        height: 4.5rem;
+        outline: none;
+        border: 1px solid $main-color;
+        border-radius: 0.8rem;
+        background: white;
+        color: $main-color;
+        transition: all 0.3s ease;
+        cursor: pointer;
+        &:hover{
+            background: $main-color;
+            color: white;
+        }
+       &.active{
+        background: $main-color;
+        color: white;
+       }
+       &.disable{
+        background: rgba($color: gray, $alpha: 0.5);
+        color: black;
+        border-color: transparent;
+        cursor: not-allowed;
+       }
+    }
+}

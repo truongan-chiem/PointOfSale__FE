@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import API from "../../API";
+import { Notificationz } from "../../components/Notification/Notification";
 
 const initialState = {
     information : null,
@@ -9,12 +10,6 @@ const initialState = {
     },
     update :{
         isLoading : false,
-        errorAPI :null,
-        success : false
-    },
-    changepw :{
-        success : null,
-        message  :''
     }
 };
 //login account
@@ -32,11 +27,11 @@ const login = createAsyncThunk(
 //change password account
 const changePassword = createAsyncThunk(
     'user/changePw',
-    async (data,{getState}) =>{
+    async ({data,reset},{getState}) =>{
         const {_id} = getState().user.information;
         try {
             const response = await API.put(`/acc/changepw/${_id}`,data)
-            return response.data 
+            return {response : response.data , reset }
         } catch (error) {
             return error
         }
@@ -79,16 +74,6 @@ const userSlice = createSlice({
         state.information = null
         localStorage.removeItem('user_id')
     },
-    resetUpdateState : (state) =>{
-        state.update.isLoading = false;
-        state.update.errorAPI = null;
-        state.update.success = false;
-
-    },
-    resetChangepw : state =>{
-        state.changepw.success = null;
-        state.changepw.message = ""
-    },
     updateImage : (state , action) =>{
         state.information.image.url = action.payload
     }
@@ -127,14 +112,12 @@ const userSlice = createSlice({
         const {success,data} = action.payload
         if(success){
             state.information = data
-            state.update.success = true
+            Notificationz("Update Profile Success!!!")
         }
     })
     builder.addCase(updateInfo.rejected , (state,action) =>{
         state.update.isLoading = false
-        console.log(action.payload);
-        state.update.errorAPI = 'Error API'
-
+        Notificationz("Error API!!!" , "error")
     })
 
     //get information user
@@ -146,13 +129,19 @@ const userSlice = createSlice({
     })
     //change password
     builder.addCase(changePassword.fulfilled , (state,action) =>{
-        const {success , message} = action.payload;
-        state.changepw.success = success
-        state.changepw.message = message
+        const {response,reset} = action.payload
+        const {success = false , message} = response;
+        if(success){
+            Notificationz(message)
+            reset();
+        }
+        else{
+            Notificationz(message,'error')
+        }
     })
   }
 });
 
 export default userSlice.reducer;
-export const {resetError,logout,resetUpdateState,resetChangepw,updateImage} = userSlice.actions
+export const {resetError,logout,updateImage} = userSlice.actions
 export {login,updateInfo,getInfoUser,changePassword}

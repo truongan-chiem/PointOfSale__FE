@@ -3,12 +3,13 @@ import { BsQrCode } from "react-icons/bs";
 import QRCode from "react-qr-code";
 import { formatNumber } from "../../utils/formatCurrency";
 import { useSelector } from "react-redux";
-
+import {Notificationz} from '../Notification/Notification'
 export const RenderQrCode = ({setOpenConfirm,handleConfirm,setMoney,totalAmount}) => {
     const socket = useSelector(state => state.socket.socket)
 
     useEffect(() => {
-        const listener = (data) =>{
+        const listener = () =>{
+            Notificationz("Payment Success!!!")
             setOpenConfirm(false);
             handleConfirm();
         }

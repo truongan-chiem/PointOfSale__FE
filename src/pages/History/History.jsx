@@ -1,7 +1,9 @@
-import React, { useRef, useState } from "react";
+import React, { useCallback, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 
 import { FiMoreHorizontal } from "react-icons/fi";
+import { FaSortAmountDown, FaSortAmountUpAlt } from "react-icons/fa";
+import { VscLoading } from "react-icons/vsc";
 import { TbDatabaseOff } from "react-icons/tb";
 import moment from "moment";
 
@@ -18,98 +20,205 @@ import Price from "../../components/Price/Price";
 import { useEffect } from "react";
 import ModalDetailOrder from "../../components/ModalDetailOrder/ModalDetailOrder";
 import useWindowSize from "../../hook/useWindowSize";
+import Pagination from "../../components/Pagination/Pagination";
 const History = () => {
   const listData = useSelector((state) => state.history.listData);
   const isLoading = useSelector((state) => state.history.isLoading);
+  const totalItem = useSelector((state) => state.history.totalItem);
+  const profit = useSelector((state) => state.history.profit);
+  const ProductSold = useSelector((state) => state.history.ProductSold);
   const dispatch = useDispatch();
-  const {width} = useWindowSize()
+  const { width } = useWindowSize();
   const [date, setDate] = useState({
     start: null,
     end: null,
   });
+  const [sortBy, setSortBy] = useState("created_at");
+  const [sortType, setSortType] = useState("decs");
+
+  const currentPage = useRef(1);
+  const getData = useCallback(
+    (page) => {
+      dispatch(getHistory({ ...date, page, sortType, sortBy }));
+    },
+    [date, dispatch, sortBy, sortType]
+  );
+
   useEffect(() => {
+    currentPage.current = 1;
     if (date.start !== null && date.end !== null) {
-      dispatch(getHistory(date));
+      getData(currentPage.current);
     }
-  }, [date, dispatch]);
+  }, [date, dispatch, getData]);
+  const totalPage = Math.ceil(totalItem / 10);
+
+  const handleSort = (_sortBy) => {
+    if (sortBy !== _sortBy) {
+      setSortBy(_sortBy);
+      setSortType("decs");
+    } else {
+      setSortType((prev) => (prev === "decs" ? "acs" : "decs"));
+    }
+  };
 
   return (
     <div className="history container">
       <Header title={"History Order"} />
       <Box className={"history__box"}>
         <div className="history__header">
-          <h1>Select Date</h1>
-          <DateRange setDate={setDate} />
+          <div className="history__header__report">
+            <div className="history__header__report-item">
+              <h3>Total Orders : </h3>
+              <span>{totalItem}</span>
+            </div>
+            <div className="history__header__report-item">
+              <h3>Profit : </h3>
+              <Price price={profit} color={"black"} />
+            </div>
+            <div className="history__header__report-item">
+              <h3>Products Sold : </h3>
+              <span>{ProductSold}</span>
+            </div>
+          </div>
+          <div className="history__header__date">
+            <button
+              onClick={() => {
+                const today = new Date();
+                const firstDayLastWeek = new Date(
+                  today.setDate(today.getDate() - today.getDay() - 6)
+                );
+                const lastDayLastWeek = new Date(
+                  today.setDate(today.getDate() - today.getDay() + 7)
+                );
+                setDate({ start: firstDayLastWeek, end: lastDayLastWeek });
+              }}
+            >
+              last week
+            </button>
+            <button
+              onClick={() => {
+                const today = new Date();
+                const firstDay = new Date(today.setDate(today.getDate() - today.getDay() + 1));
+                const lastDay = new Date(today.setDate(today.getDate() - today.getDay() + 7));
+                setDate({ start: firstDay, end: lastDay });
+              }}
+            >
+              this week
+            </button>
+            <button
+              onClick={() => {
+                const today = new Date();
+                today.setDate(today.getDate() - 1);
+                setDate({ start: today, end: today });
+              }}
+            >
+              Yesterday
+            </button>
+            <DateRange setDate={setDate} history={true} />
+          </div>
         </div>
 
         <div className="history__body">
-          {isLoading ? (
-            <div className="history__body__loading">is Loading ...</div>
-          ) : (
-            <table width={'100%'}>
-              <thead>
-
-                <tr>
-                  {width >= 768 && <th>Order ID</th>}
-                  <th>Staff</th>
-                  <th>Date</th>
-                  {width >= 768 && <th>Amount</th>}
-                  {width >= 768 && <th>Payment</th>}
-                  <th>Action</th>
-                </tr>
-              </thead>
-              <tbody>
-
-                {listData.length > 0 ? (
+            <div className="table">
+              <div className="table__header">
+                <div>Full name</div>
+                <div className="pointer" onClick={() => handleSort("created_at")}>
+                  <p>Date</p>
+                  {sortBy === "created_at" && sortType === "decs" ? (
+                    <FaSortAmountDown />
+                  ) : sortBy === "created_at" && sortType === "acs" ? (
+                    <FaSortAmountUpAlt />
+                  ) : (
+                    <></>
+                  )}
+                </div>
+                {width >= 768 && (
+                  <div className="pointer" onClick={() => handleSort("count")}>
+                    <p>Count</p>
+                    {sortBy === "count" && sortType === "decs" ? (
+                      <FaSortAmountDown />
+                    ) : sortBy === "count" && sortType === "acs" ? (
+                      <FaSortAmountUpAlt />
+                    ) : (
+                      <></>
+                    )}
+                  </div>
+                )}
+                {width >= 768 && (
+                  <div className="pointer" onClick={() => handleSort("totalPrice")}>
+                    <p>Amount</p>
+                    {sortBy === "totalPrice" && sortType === "decs" ? (
+                      <FaSortAmountDown />
+                    ) : sortBy === "totalPrice" && sortType === "acs" ? (
+                      <FaSortAmountUpAlt />
+                    ) : (
+                      <></>
+                    )}
+                  </div>
+                )}
+                {width >= 768 && (
+                  <div className="pointer" onClick={() => handleSort("optionPayment")}>
+                    <p>Payment</p>
+                    {sortBy === "optionPayment" && sortType === "decs" ? (
+                      <FaSortAmountDown />
+                    ) : sortBy === "optionPayment" && sortType === "acs" ? (
+                      <FaSortAmountUpAlt />
+                    ) : (
+                      <></>
+                    )}
+                  </div>
+                )}
+                <div>Action</div>
+              </div>
+              <div className="table__body">
+                {isLoading ? <div className="history__body__loading">
+                  <VscLoading />
+                </div> : 
+                listData.length > 0 ? (
                   listData.map((item, index) => {
-                    const totalAmount = item.orders.reduce(
-                      (total, item2) => total + item2.productId?.price * item2.number,
-                      0
-                    );
                     const date = moment(item.created_at).format("DD/MM/YYYY");
                     return (
-                      <tr key={index}>
-                        {width >= 768 && <td>#{item._id}</td>}
-                        
-                        <td>
+                      <div className="table__body__row" key={index}>
+                        <div className="table__body__row-item">
                           {item.owenId.lastName}&nbsp;{item.owenId.firstName}
-                        </td>
-                        <td>{date}</td>
-                        {width >= 768 && 
-                       <>
-                        <td>
-                          <Price price={Number(totalAmount) + totalAmount * 0.1} className="history__price" />
-                        </td>
-                        <td>
-                          <div className="history__body__payment">
-                            {item.optionPayment === 0
-                              ? "Cash"
-                              : item.optionPayment === 1
-                              ? "Debit"
-                              : "E-Wallet"}
-                          </div>
-                        </td>
-                        </>
-                        }
-                        <td>
+                        </div>
+                        <div className="table__body__row-item">{date}</div>
+                        {width >= 768 && (
+                          <>
+                            <div className="table__body__row-item">{item.count}</div>
+                            <div className="table__body__row-item">
+                              <Price price={item.totalPrice} color={"black"} className="history__price" />
+                            </div>
+                            <div
+                              className="table__body__row-item"
+                              style={{ display: "flex", justifyContent: "center" }}
+                            >
+                              <div className="history__body__payment">
+                                {item.optionPayment === 0
+                                  ? "Cash"
+                                  : item.optionPayment === 1
+                                  ? "Debit"
+                                  : "E-Wallet"}
+                              </div>
+                            </div>
+                          </>
+                        )}
+                        <div className="table__body__row-item">
                           <Action name={`Order ${item._id}`} id={item._id} />
-                        </td>
-                      </tr>
+                        </div>
+                      </div>
                     );
                   })
                 ) : (
-                  <tr>
-                    <td colSpan={6} id="no-result-history">
+                    <div id="no-result-history">
                       <TbDatabaseOff />
                       <p>No results found</p>
-                    </td>
-                  </tr>
+                    </div>
                 )}
-              </tbody>
-
-            </table>
-          )}
+              </div>
+            </div>
         </div>
+        <Pagination currentPage={currentPage} getData={getData} totalPage={totalPage} />
       </Box>
     </div>
   );
@@ -136,9 +245,11 @@ const Action = ({ name, id }) => {
           >
             Detail
           </button>
-         { userInformation?.role === 2 && <button className="history__btn del" onClick={() => setIsDelect(true)}>
-            Delete
-          </button> }
+          {userInformation?.role === 2 && (
+            <button className="history__btn del" onClick={() => setIsDelect(true)}>
+              Delete
+            </button>
+          )}
         </Popup>
       )}
       {isDelect && <ModalDelete setIsToggleDelete={setIsDelect} type="order" name={name} id={id} />}

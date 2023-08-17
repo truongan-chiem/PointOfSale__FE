@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -7,7 +7,7 @@ import Input from "../../components/Input/Input";
 import Button from "../Button/Button";
 import { Notificationz } from "../Notification/Notification";
 import { useSelector, useDispatch } from "react-redux";
-import { resetUpdateState, updateInfo } from "../../redux/Slice/userSlice";
+import { updateInfo } from "../../redux/Slice/userSlice";
 const schema = yup.object().shape({
   firstName: yup.string(),
   lastName: yup.string(),
@@ -27,13 +27,12 @@ const ProfileInformation = () => {
   const [error, setError] = useState();
 
   const userInfo = useSelector((state) => state.user.information);
-  const errorAPI = useSelector(state => state.user.update.errorAPI)
-  const success = useSelector(state => state.user.update.success)
   const dispatch = useDispatch();
   const {
     register,
     handleSubmit,
     setValue,
+    clearErrors,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
@@ -52,24 +51,23 @@ const ProfileInformation = () => {
 
     dispatch(updateInfo(dataForm))
   };
-  useEffect(() => {
-    return () =>{
-      dispatch(resetUpdateState())
-    }
-  }, [dispatch]);
+
+
+  const fillData = useCallback (() =>{
+    Object.entries(userInfo).forEach(([key, value], index) => {
+      setValue(key, value);
+    });
+  },[setValue,userInfo])
+
 
   useEffect(() => {
     if (userInfo) {
       
-      Object.entries(userInfo).forEach(([key, value], index) => {
-        // if (key === "gender") {
-        //   setValue(key, 0);
-        // } else {
-          setValue(key, value);
-        // }
-      });
+      fillData()
     }
-  }, [userInfo,setValue]);
+  }, [userInfo,fillData]);
+
+ 
 
   useEffect(() => {
     Object.entries(errors).forEach(([key, value], index) => {
@@ -79,9 +77,6 @@ const ProfileInformation = () => {
     });
   }, [errors]);
 
-  useEffect(() => {
-    setError(errorAPI)
-  }, [errorAPI]);
 
   useEffect(() => {
     if (error) {
@@ -89,11 +84,7 @@ const ProfileInformation = () => {
       Notificationz(`${item[0].substring(0, 5).toUpperCase()} : ${item[1]}`, "warning");
     }
   }, [error]);
-  useEffect(() => {
-    if (success) {
-      Notificationz("Success Updating!!!");
-    }
-  }, [success]);
+
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="profile__tab__gender">
@@ -158,7 +149,12 @@ const ProfileInformation = () => {
         />
       </div>
       <div className="profile__tab__splitField">
-        <Button className={"btn__outline"} disabled>discard changes</Button>
+        <Button className={"btn__outline"} onClick={ (e) => {
+          e.preventDefault();
+          fillData();
+          clearErrors();
+          setError();
+          }}>discard changes</Button>
         <Button>save changes</Button>
       </div>
     </form>

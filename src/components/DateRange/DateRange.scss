@@ -3,12 +3,16 @@
 .calendarWrap {
     position: relative;
     &__input{
-        padding: 2rem;
         border: 1px solid $main-color;
         border-radius: 1rem;
         @include flex(center,center);
+        transition: all 0.3s ease;
         &:hover{
             cursor: pointer;
+            background: $main-color;
+            & > .dateHistory{
+                color: white;
+            }
         }
         & > input{
             outline: none;

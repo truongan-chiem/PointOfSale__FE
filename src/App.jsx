@@ -13,7 +13,6 @@ function App() {
   dispatch(connectSocket());
 
   useEffect(() => {
-    dispatch(getAllProduct())
     const user_id = localStorage.getItem('user_id')
     if(user_id){
       dispatch(getInfoUser(user_id))

@@ -57,8 +57,8 @@ const ModalDetailOrder = ({setOpenDetail ,id}) => {
             <table>
                 <thead>
                     <tr>
-                        <th>ID</th>
                         <th>Name</th>
+                        <th>Type</th>
                         <th>Price</th>
                         <th>Qty</th>
                         <th>Total Amount</th>
@@ -70,8 +70,8 @@ const ModalDetailOrder = ({setOpenDetail ,id}) => {
                         subTotal += totalAmount
                         return(
                                 <tr key={index}>
-                                    <td>{item.productId._id}</td>
                                     <td>{item.productId.name}</td>
+                                    <td>{item.productId.type} </td>
                                     <td><Price price={item.productId.price} color='black'/> </td>
                                     <td>{item.number}</td>
                                     <td><Price price={totalAmount} color="black" /></td>

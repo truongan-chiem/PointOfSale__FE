@@ -36,6 +36,26 @@
                 display: none;
             }
         }
+        &__scan{
+            background: white;
+            color: $main-color;
+            outline: none;
+            border: none;
+            padding: 2rem;
+            font-size: 2rem;
+            border-radius: 0.8rem;
+            margin-left: 1rem;
+            @include flex(center,center);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            &:hover{
+                background: $main-color;
+                color:white
+            }
+            @include tablet{
+                display: none;
+            }
+        }
         &__cart{
             font-size: 2rem;
             margin-left: 2rem;

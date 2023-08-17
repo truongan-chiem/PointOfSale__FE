@@ -1,8 +1,8 @@
 import React from 'react'
-import {IoMdNotificationsOutline} from 'react-icons/io'
+
 import './CardStaff.scss'
 const CardStaff = ({user}) => {
-  // const {firstName,lastName,role} = userInformation
+
   return (
     <div className='card-staff'>
         <div className='card-staff__info'>
@@ -13,7 +13,7 @@ const CardStaff = ({user}) => {
           </div>
         </div>
         <div className="card-staff__noti">
-          <IoMdNotificationsOutline />
+          <p>K</p>
         </div>
     </div>
   )

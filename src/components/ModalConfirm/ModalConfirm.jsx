@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 
 import Modal from "../Modal/Modal";
@@ -35,24 +35,75 @@ const ModalConfirm = ({
       onClose={() => setOpenConfirm(false)}
     >
       {optionPayment === 0 ? (
-        <div className="modal-confirm__cash">
-          <h2>Enter money</h2>
-          <Input
-            onChange={(e) => setMoney(formatNumber(e.target.value))}
-            value={money}
-            left={"1rem"}
-            placeholder={"Enter Money"}
-            className={messError ? "errorMoney" : ""}
-          />
-          {messError && <p>{messError}</p>}
-          <Button onClick={handleConfirm}>Confirm</Button>
-        </div>
+        <EnterMoney setMoney = {setMoney} money = {money} messError = {messError} handleConfirm = {handleConfirm} />
       ) : (
         <RenderQrCode setOpenConfirm={setOpenConfirm} handleConfirm = {handleConfirm} setMoney = {setMoney} totalAmount = {totalAmount}/>
       )}
     </Modal>
   );
 };
+
+
+
+const EnterMoney = ({setMoney,money,messError,handleConfirm}) =>{
+
+  useEffect(() => {
+    const handleEnter = (e) =>{
+      if(e.keyCode === 13){
+        handleConfirm();
+      }
+      if(e.keyCode === 9){
+        if(Number((money+"000").replaceAll(".","") ) < 100000000){
+          setMoney(prev => formatNumber(prev + "000"))
+        }
+        else{
+          setMoney(formatNumber("100000000"))
+        }
+      }
+    }
+
+    const handleTab = e =>{
+      if(e.keyCode === 9){
+        e.preventDefault();
+      }
+    }
+
+
+    document.addEventListener("keyup",handleEnter)
+    document.addEventListener("keydown",handleTab)
+
+    return () =>{
+      document.removeEventListener('keyup' , handleEnter)
+      document.removeEventListener('keydown' , handleTab)
+    }
+  }, [handleConfirm,setMoney,money])
+  
+  const handleChange = e => {
+    const {value} = e.target
+    if(Number(value.replaceAll(".","")) < 100000000){
+        setMoney(formatNumber(value))
+    }
+    else if (Number(value.replaceAll(".","")) >= 100000000){
+      setMoney(formatNumber("100000000"))
+    }
+  }
+
+  return(
+    <div className="modal-confirm__cash">
+      <h2>Enter money</h2>
+      <Input
+        autoFocus
+        onChange={(e) => handleChange(e)}
+        value={money}
+        left={"1rem"}
+        placeholder={"Enter Money"}
+        className={messError ? "errorMoney" : ""}
+        />
+      {messError && <p>{messError}</p>}
+      <Button onClick={handleConfirm}>Confirm</Button>
+      </div>
+  )
+}
 
 export default ModalConfirm;
 

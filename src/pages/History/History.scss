@@ -1,17 +1,104 @@
 @use '../../sass/' as *;
 
 .history{
-    padding-bottom: 1rem !important;
+    padding-bottom: 0rem !important;
     &__box{
-        padding: 2rem;
+        padding: 1rem 2rem;
         margin-top: 1rem;
     }
+    
     &__header{
         @include flex(center,space-between);
-        @include mobile{
-            h1{
-                font-size: 2rem;
+        &__report{
+            @include flex(center,flex-start);
+            font-size: 1.6rem;
+            font-weight: 600;
+            &-item{
+                @include flex(center,center);
+                margin: 0 1rem;
+                & > h3{
+                    margin-right: 0.4rem;
+                    color:$main-color;
+                    font-weight: bold;
+                }
             }
+            @include tablet{
+                font-size: 0.8rem;
+                &-item{
+                    margin: 0 0.4rem;
+                    & > h3{
+                        margin-right: 0.2rem;
+                    }
+                    & > .price{
+                        font-size: 0.8rem;
+                    }
+                }
+            }
+            @include mobile{
+                margin-bottom: 1rem;
+                font-size: 0.6rem;
+                &-item{
+                    margin: 0 0.2rem;
+                    & > .price{
+                        font-size: 0.6rem;
+                    }
+                }
+            }
+        }
+        &__date{
+            @include flex(center,flex-start);
+            & > button{
+                outline: none;
+                border: 1px solid $main-color;
+                background: white;
+                padding: 1.6rem 1.6rem ;
+                color:$main-color;
+                margin: 0 0.5rem;
+                border-radius: 1rem;
+                text-transform: capitalize;
+                font-size: 1.4rem;
+                font-weight: bold;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                &:hover{
+                    background: $main-color;
+                    color: white;
+                }
+                @include tablet{
+                    font-size: 0.8rem;
+                    padding: 1rem;
+                }
+                @include mobile{
+                    font-size: 0.6rem;
+                    border-radius: 0.7rem;
+                }
+            }
+            @include tablet{
+                & > .calendarWrap{
+                    & > .calendarWrap__input{
+                        padding: 0.9rem !important;
+                        & > svg{
+                            width: 1.4rem;
+                            height: 1.4rem;
+                        }
+                    }
+                }
+            }
+            @include mobile{
+                & > .calendarWrap{
+                    & > .calendarWrap__input{
+                        padding: 0.9rem !important;
+                        & > svg{
+                            width: 1rem;
+                            height: 1rem;
+                        }
+                    }
+                }
+            }
+        }
+        @include mobile{
+            @include flex(center,flex-start);
+            flex-direction: column;
         }
     }
     &__body{
@@ -19,96 +106,15 @@
         margin-top: 2rem;
         font-size: 1.6rem;
         &__loading{
-            font-weight: 700;
-            color: $main-color;
-            font-size: 4rem;
-            margin-top: 10rem;
-            text-align: center;
-            animation: chopchop 1s infinite;
-        }
-        & > table{
-            thead{
-                display: table;
-                width: 100%;
-                table-layout: fixed;
+            height: 40rem;
+            @include flex(center,center);
+            & > svg{
+                font-weight: 700;
+                color: $main-color;
+                font-size: 4rem;
+                animation: loading 1s infinite;
             }
-            tbody{
-                overflow-y: auto;
-                overflow-x: hidden;
-                display: block;
-                @include desktop{
-                    height: 79vh;
-                }
-                @include tablet{
-                    height: 76vh;
-                }
-                @include mobile{
-                    height: 68vh;
-                }
-                @include mobile-small{
-                    height: 66vh;
-                }
-                height: 60vh;
-            }
-            tr{
-                display: table;
-                width: 100%;
-                table-layout: fixed;
-                position: relative;
-                th{
-                    text-align: start;
-                    font-size: 2rem;
-                    padding: 1rem;
-                    &:last-child{
-                        text-align: center;
-                    }
-                    @include desktop{
-                        font-size: 1rem;
-                    }
-                    &:first-child{
-                        width: 30%;
-                    }
-                }
-                td{
-                    padding: 1rem;
-                    &:first-child{
-                        width: 30%;
-                    }
-                    & > .iconMore{
-                        @include flex(center,center);
-                        & > svg{
-                            cursor: pointer;
-                        }
-                    }
-                    @include desktop{
-                        font-size: 1.1rem;
-                    }
-                    & > .history__price{
-                        color: black ;
-                        font-weight: 400;
-                        @include desktop{
-                           font-size: 1rem;
-                        }
-                    }
-                }
-                // td > .history__price{
-                //     color: black ;
-                //     font-weight: 400;
-                //     @include desktop{
-                //        font-size: 1rem;
-                //     }
-                // }
-            }
-            & > * ~ *::after{
-                position: absolute;
-                content: "";
-                top: 0;
-                left: 50%;
-                transform: translate(-50%,200%);
-                width: 100%;
-                height: 1px;
-                background-color: rgba($color: $gray, $alpha: 0.1);
-            }
+            
         }
         &__payment{
             background-color: #56C3C9;
@@ -122,6 +128,42 @@
                 height: 3rem;
             }
         }
+        & > .table {
+            
+            & > .table__body > .table__body__row > .table__body__row-item{
+                text-align: center !important;
+                & > .iconMore{
+                    cursor: pointer;
+                }
+            }
+            & > .table__header > div{
+                text-align: center !important;
+                font-size: 2rem;
+            }
+
+        } 
+        & > .table > .table__body > .table__body__row > .table__body__row-item:last-child{
+            @include flex(center,center);
+            & > div{
+                width: fit-content;
+            }
+        }
+        @include tablet{
+            & > .table{
+                & > .table__header > div{
+                    font-size: 1.4rem ;
+                } 
+                & > .table__body > .table__body__row > .table__body__row-item{
+                    font-size: 1.2rem;
+                    & > .price{
+                        font-size: 1.2rem;
+                        font-weight: 500;
+                    }
+                }
+    
+            }
+        }
+        
     }
     &__btn{
         color: $black;
@@ -150,13 +192,18 @@
         }
     }
 }
-
+.pointer{
+    cursor: pointer;
+    @include flex(center,center);
+    & > * ~*{
+        margin-left: 0.4rem;
+    }
+}
 #no-result-history{
     width: 100%;
-    text-align: center;
+    @include flex(center,center);
     color: gray;
-    vertical-align: middle;
-    height: 45rem;
+    height: 40rem;
     & > svg{
         font-size: 5rem;
     }
@@ -166,14 +213,4 @@
         text-transform: capitalize;
     }
 }
-@keyframes chopchop {
-    0%{
-        opacity: 0;
-    }
-    50%{
-        opacity: 1;
-    }
-    100%{
-        opacity: 0;
-    }
-}
+

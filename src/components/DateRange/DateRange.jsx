@@ -9,13 +9,13 @@ import './DateRange.scss'
 import useWindowSize from '../../hook/useWindowSize'
 
 
-const DateRange = ({setDate}) => {
+const DateRange = ({setDate , history = false }) => {
   const {width} = useWindowSize()
   // date state
   const [range, setRange] = useState([
     {
-      startDate: new Date(new Date().getFullYear(),new Date().getMonth(),1),
-      endDate:new Date(new Date().getFullYear(),new Date().getMonth() + 1,0),
+      startDate: history ? new Date() :  new Date(new Date().getFullYear(),new Date().getMonth(),1),
+      endDate: history ? new Date() : new Date(new Date().getFullYear(),new Date().getMonth() + 1,0),
       key: 'selection'
     }
   ])
@@ -65,13 +65,14 @@ const DateRange = ({setDate}) => {
       <div
           onClick={ () => setOpen(open => !open) }
           className = "calendarWrap__input"
+          style={history ? {padding:"1.4rem"} : {padding:"2rem"}}
       >
-        <input
+       { !history && <input
           value={`${format(range[0].startDate, "dd/MM/yyyy")} to ${format(range[0].endDate, "dd/MM/yyyy")}`}
           readOnly
           className="inputBox"
-        />
-        <MdDateRange />
+        />}
+        <MdDateRange  className={history ? "dateHistory" : ""}/>
       </div>
       <div ref={refOne}>
         {open && 

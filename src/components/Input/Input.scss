@@ -21,17 +21,19 @@
             border: none;
             font-size: 1.5rem;
             color: $main-color;
-    
             &:valid ~ .label__search{
                 display: none;
             }
-            &:valid ~ .label__normal , &:focus ~ .label__normal{
+            &:valid ~ .label__normal , &:focus ~ .label__normal , &:disabled ~ .label__normal{
                 top: 20%;
                 font-size: 1rem;
                 font-weight: 700;
                 @include mobile{
                     font-size: 0.8rem;
                 }
+            }
+            &:disabled{
+                cursor: not-allowed;
             }
             @include mobile{
                 font-size: 1.2rem;

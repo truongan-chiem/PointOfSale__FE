@@ -59,7 +59,7 @@ const Bill = (props,ref) => {
 
   const handlePrintBill = async () => {
   
-      const result = await dispatch(printBill({optionPayment:optionPayment,cash : Number(money.replaceAll('.',''))})).unwrap();
+      const result = await dispatch(printBill({optionPayment:optionPayment,cash : Number(money.replaceAll('.','')) , totalPrice : total})).unwrap();
       if(result){
         setIdOrder(result._id)
       }

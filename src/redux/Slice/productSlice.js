@@ -1,17 +1,20 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import API from "../../API";
+import { Notificationz } from "../../components/Notification/Notification";
 
 const initialState = {
   product : {
     listProduct: [],
     isLoading : false,
+    haveData : true,
+    changeTabType : false
   },
   bill :{
     orders: [],
   },
   setting : {
     isLoading : false,
-    error : null
+    finish : false
   },
   print_bill :{
     isLoading : false,
@@ -22,18 +25,19 @@ const initialState = {
 
 const getAllProduct = createAsyncThunk(
   'products/getAll',
-  async () =>{
-    const response = await API.get('/product')
+  async (data) =>{
+    const qs = "?" + new URLSearchParams(data).toString()
+    const response = await API.get(`/product${qs}`)
     return response.data;
   }
 )
 
 const createNewProduct = createAsyncThunk(
   'products/addNewItem',
-  async(data, {rejectWithValue}) =>{
+  async({dataForm, resetForm}, {rejectWithValue}) =>{
     try {
-      const response = await API.post('/product',data)
-      return response.data
+      const response = await API.post('/product',dataForm)
+      return {response : response.data , resetForm}
       
     } catch (error) {
       return rejectWithValue(error.response)
@@ -43,10 +47,10 @@ const createNewProduct = createAsyncThunk(
 
 const updateProduct = createAsyncThunk(
   'products/updateItem',
-  async({_id,dataForm}, {rejectWithValue}) =>{
+  async({_id,dataForm , setToggleFormEdit}, {rejectWithValue}) =>{
     try {
       const response = await API.put(`/product/${_id}`,dataForm)
-      return response.data
+      return {response : response.data , setToggleFormEdit}
       
     } catch (error) {
       return rejectWithValue(error.response)
@@ -70,7 +74,7 @@ const deleteProduct = createAsyncThunk(
 
 const printBill = createAsyncThunk(
   'printBill',
-  async({optionPayment,cash},{rejectWithValue,getState}) =>{
+  async({optionPayment,cash,totalPrice},{rejectWithValue,getState}) =>{
     const state = getState();
     let orders = state.products.bill.orders;
     let newOrders = []
@@ -81,7 +85,7 @@ const printBill = createAsyncThunk(
 
     const owenId = state.user.information._id;
     try {
-      const data = { optionPayment , orders : newOrders , owenId , cash }
+      const data = { optionPayment , orders : newOrders , owenId , cash ,totalPrice}
       const response = await API.post('/history/order',data)
       return {...response.data,orders : orders }
     } catch (error) {
@@ -143,11 +147,11 @@ const productSlice = createSlice({
       }
     }
     ,
-    resetErrorSetting : (state) =>{
-      state.setting.error = null
-    },
     clearBill : (state) =>{
       state.bill.orders = []
+    },
+    changeTab : (state,action) =>{
+      state.product.changeTabType = action.payload
     }
   },
   extraReducers : builder =>{
@@ -157,23 +161,37 @@ const productSlice = createSlice({
     })
     builder.addCase(getAllProduct.fulfilled , (state,action) =>{
       state.product.isLoading = false
-      state.product.listProduct = action.payload
+      if(state.product.changeTabType){
+        state.product.listProduct = action.payload
+        state.product.haveData = true
+      }
+      else{
+        if(action.payload.length > 0){
+          state.product.haveData = true
+          state.product.listProduct = [...state.product.listProduct, ...action.payload]
+        }
+        else{
+          state.product.haveData = false;
+        }
+      }
     })
     //create new product
     builder.addCase(createNewProduct.pending , (state) =>{
       state.setting.isLoading = true
     } )
     builder.addCase(createNewProduct.fulfilled , (state,action)=>{
-      const newItem = action.payload
+      const {response, resetForm} = action.payload
 
+      const newItem = response
       delete newItem.__v
       
       state.setting.isLoading = false
       state.product.listProduct.unshift(newItem)
-      state.setting.error = ''
+      Notificationz('Success!!!');
+      resetForm();
     })
     builder.addCase(createNewProduct.rejected , (state,action) =>{
-      state.setting.error = action.payload.data
+      Notificationz(action.payload.data.message , "error");
       state.setting.isLoading = false
     })
     //delete product
@@ -190,18 +208,20 @@ const productSlice = createSlice({
     })
     builder.addCase(updateProduct.fulfilled,(state,action) =>{
       state.setting.isLoading = false
-      const {data} = action.payload
-    
+      const {response,setToggleFormEdit} = action.payload
+      const {data} = response;
       const index = state.product.listProduct.findIndex(item => item._id === data._id)
       
       state.product.listProduct.splice(index,1,data)
       
-      state.setting.error = '';
+      Notificationz("Update Product Success !!!")
+      setToggleFormEdit(false);
 
     })
     builder.addCase(updateProduct.rejected,(state,action) =>{
       state.setting.isLoading = false
-      state.setting.error = action.payload.data;
+      Notificationz(action.payload.data.message,"error")
+
     })
     //printBill
 
@@ -228,5 +248,5 @@ const productSlice = createSlice({
 
 export default productSlice.reducer;
 
-export const { addItemToBill ,plusNumber,minusNumber,resetErrorSetting,clearBill} = productSlice.actions;
+export const { addItemToBill ,plusNumber,minusNumber ,clearBill,changeTab} = productSlice.actions;
 export {getAllProduct,createNewProduct ,deleteProduct ,updateProduct,printBill};

@@ -5,6 +5,7 @@
     display: flex;
     flex-direction: column;
     overflow: hidden;
+    position: relative;
     &__header{
         flex: 0 1 auto;
         @include flex(center,space-between);
@@ -29,6 +30,27 @@
         padding: 1.5rem;
         @include desktopLg{
             grid-template-columns: repeat(1 , minmax(0,1fr));
+        };
+        &__empty{
+            @include flex(center , center);
+            font-size: 4rem;
+            color: rgba($color: gray, $alpha: 0.7);
+            height: 38rem;
+            grid-column: span 2;
+            font-weight: 700;
+            & > svg{
+                margin-right: 2rem;
+            }
         }
     }
+}
+
+.product__loading{
+    position: absolute;
+    bottom: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 2.5rem;
+    color: $main-color;
+    animation: loading 1s infinite;
 }

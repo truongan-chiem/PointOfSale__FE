@@ -4,17 +4,29 @@ import API from "../../API";
 
 const initialState = {
   listData :[],
-  isLoading : false
+  isLoading : false,
+  totalItem : null,
+  profit : null,
+  ProductSold : null
 };
 
 const getHistory = createAsyncThunk(
   'history/getAll',
   async (data,{rejectWithValue}) => {
     try {
-      let {start,end} = data;
+      let {start,end,page,sortBy,sortType} = data;
       start = format(start, 'yyyy-MM-dd');
       end = format(end, 'yyyy-MM-dd');
-      const response = await API.get(`/history?start=${start}&end=${end}`)
+      let newData = {
+        start,
+        end,
+        limit : 10,
+        page : page,
+        sortBy,
+        sortType
+      }
+      const qs = "?" + new URLSearchParams(newData).toString()
+      const response = await API.get(`/history${qs}`)
       return response.data
     } catch (error) {
       return rejectWithValue(error)
@@ -40,7 +52,10 @@ const historySlice = createSlice({
     })
     builder.addCase(getHistory.fulfilled , (state,action) =>{
       state.isLoading = false
-      state.listData = action.payload
+      state.listData = action.payload.data
+      state.totalItem = action.payload.pagination.totalItem
+      state.profit = action.payload.pagination.profit
+      state.ProductSold = action.payload.pagination.countProductSold
     })
     builder.addCase(getHistory.rejected , (state,action) =>{
       state.isLoading = false
