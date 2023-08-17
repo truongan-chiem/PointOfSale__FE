@@ -1,7 +1,6 @@
 import Route from "./utils/router";
 import {useDispatch} from 'react-redux'
 import { useEffect } from "react";
-import { getAllProduct } from "./redux/Slice/productSlice";
 import { getInfoUser } from "./redux/Slice/userSlice";
 import { connectSocket } from "./redux/Slice/socketSlice";
 
