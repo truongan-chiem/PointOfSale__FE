@@ -7,7 +7,8 @@ const initialState = {
     listProduct: [],
     isLoading : false,
     haveData : true,
-    changeTabType : false
+    changeTabType : false,
+    totalItem : null
   },
   bill :{
     orders: [],
@@ -28,6 +29,14 @@ const getAllProduct = createAsyncThunk(
   async (data) =>{
     const qs = "?" + new URLSearchParams(data).toString()
     const response = await API.get(`/product${qs}`)
+    return response.data;
+  }
+)
+
+const getHotProduct = createAsyncThunk(
+  'products/getHotProduct',
+  async () =>{
+    const response = await API.get("/statistic/trending")
     return response.data;
   }
 )
@@ -152,7 +161,7 @@ const productSlice = createSlice({
     },
     changeTab : (state,action) =>{
       state.product.changeTabType = action.payload
-    }
+    },
   },
   extraReducers : builder =>{
     //getAllProduct
@@ -161,18 +170,34 @@ const productSlice = createSlice({
     })
     builder.addCase(getAllProduct.fulfilled , (state,action) =>{
       state.product.isLoading = false
+      const {data , pagination} = action.payload; 
       if(state.product.changeTabType){
-        state.product.listProduct = action.payload
+        state.product.listProduct = data
+        state.product.totalItem = pagination.totalItem
         state.product.haveData = true
       }
       else{
-        if(action.payload.length > 0){
+        if(data.length > 0){
           state.product.haveData = true
-          state.product.listProduct = [...state.product.listProduct, ...action.payload]
+          state.product.listProduct = [...state.product.listProduct, ...data]
         }
         else{
           state.product.haveData = false;
         }
+      }
+    })
+    //getHotProduct
+    builder.addCase(getHotProduct.pending , state =>{
+      state.product.isLoading = true
+    })
+    builder.addCase(getHotProduct.fulfilled , (state,action) =>{
+      const data = action.payload
+      state.product.isLoading = false
+      state.product.listProduct = []
+      state.product.totalItem = data.length;
+      state.product.haveData = false;
+      for (let index = 0; index < data.length; index++) {
+        state.product.listProduct.push(data[index].productId)
       }
     })
     //create new product
@@ -249,4 +274,4 @@ const productSlice = createSlice({
 export default productSlice.reducer;
 
 export const { addItemToBill ,plusNumber,minusNumber ,clearBill,changeTab} = productSlice.actions;
-export {getAllProduct,createNewProduct ,deleteProduct ,updateProduct,printBill};
+export {getAllProduct,createNewProduct ,deleteProduct ,updateProduct,printBill ,getHotProduct};

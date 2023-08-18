@@ -5,6 +5,9 @@
     height: 100%;
     &__main{
         padding: 4rem 2rem 0 2rem;
+        @include mobile{
+            padding: 2rem 2rem 0 2rem;
+        }
         height: 100%;
         width: 100%;
         flex: 1;

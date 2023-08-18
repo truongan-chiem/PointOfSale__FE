@@ -5,11 +5,11 @@
     height: 89vh;
     border-radius: 3rem;
     padding: 2rem;
-    @include desktop{
+    @include tablet{
         width: 76%;
         position: fixed;
         top: 1%;
-        left: 21%;
+        right: 2rem;
         height: fit-content;
         @include flex(center,flex-start);
         padding: 1rem 2rem;
@@ -19,8 +19,8 @@
         }
     }
     @include mobile{
-        left: 28%;
-        width: 66%;
-        padding: 1rem;
+        right: 5rem;
+        width: fit-content;
+        background: transparent;
     }
 }

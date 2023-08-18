@@ -3,6 +3,7 @@
 .box-area-chart{
     padding: 2rem 2rem 4rem 2rem;
     grid-column: span 4 ;
+    position: relative;
     @include desktop{
         grid-column: span 2 ;
     }
@@ -16,5 +17,15 @@
     &__header{
         margin-bottom: 2rem;
         @include flex(center,space-between);
+    }
+    &__loading{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        font-size: 5rem;
+        color: $main-color;
+        
+        animation: loading 1s infinite;
     }
 }

@@ -3,6 +3,7 @@
 .calendarWrap {
     position: relative;
     &__input{
+        padding: 2rem;
         border: 1px solid $main-color;
         border-radius: 1rem;
         @include flex(center,center);

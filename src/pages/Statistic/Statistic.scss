@@ -16,8 +16,13 @@
     }
     &__header{
         @include flex(center,space-between);
-        & > .calendarWrap > .calendarWrap__input{
-            background-color: #fff;
-        }
+        & > .calendarWrap {
+            & > .calendarWrap__input{
+                background-color: #fff;
+            }
+            @include mobile{
+                margin-right: 5rem;
+            }
+        } 
     }
 }

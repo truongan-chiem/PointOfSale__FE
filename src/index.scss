@@ -13,6 +13,9 @@ body{
 }
 .container{
   padding: 4rem 2rem;
+  @include mobile{
+    padding: 2rem;
+  }
 }
 html {
   font-size: 62.5%;

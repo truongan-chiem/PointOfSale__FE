@@ -47,6 +47,11 @@
     }
     &__img{
         width: 7rem;
+        height: 7rem;
+        @include tablet{
+            width: 5rem;
+            height: 5rem;
+        }
         border-radius: 50%;
     }
     &__info{

@@ -72,7 +72,7 @@ const userSlice = createSlice({
     },
     logout : (state) =>{
         state.information = null
-        localStorage.removeItem('user_id')
+        sessionStorage.removeItem('user_id')
     },
     updateImage : (state , action) =>{
         state.information.image.url = action.payload
@@ -89,7 +89,7 @@ const userSlice = createSlice({
         if(success){
             state.login.errorAPI = ""
             state.information = {...user}
-            localStorage.setItem('user_id',user._id)
+            sessionStorage.setItem('user_id',user._id)
         }
     })
     builder.addCase(login.rejected ,(state,action) =>{

@@ -67,7 +67,7 @@ const Home = () => {
               key={index}
               icon={item.icon}
               type={"shortcut"}
-              className={item.type === tabValue ? "active" : ""}
+              className={item.type === tabValue ? "active-listType" : ""}
             >
               {item.display}
             </Button>
@@ -75,7 +75,7 @@ const Home = () => {
         </nav>
 
       
-        <TabContent tabValue={tabValue} />
+        <TabContent tabValue={tabValue} setTabValue = {setTabValue}/>
          
       </div>
       {openBill && (

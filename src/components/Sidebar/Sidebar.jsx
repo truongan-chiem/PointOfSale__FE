@@ -31,7 +31,7 @@ const listNav = [
     icon: <FiSettings />,
   },
 ];
-const Sidebar = () => {
+const Sidebar = ({setOpenMenu}) => {
   const location = useLocation();
   const user = useSelector(state => state.user.information)
   return (
@@ -46,6 +46,7 @@ const Sidebar = () => {
             return (
               <Link to={item.link} key={index}>
                 <Button
+                  onClick={() => setOpenMenu(false)}
                   type={"shortcut"}
                   icon={item.icon}
                   className={item.link === location.pathname ? "activeNav" : ""}
@@ -61,6 +62,7 @@ const Sidebar = () => {
       </div>
       <Link to={"/profile"}>
         <Button
+          onClick={() => setOpenMenu(false)}
           type={"shortcut"}
           className={`sidebar__profile ${location.pathname === "/profile" ? "activeNav" : ""}`}
           icon={

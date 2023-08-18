@@ -65,7 +65,6 @@ const DateRange = ({setDate , history = false }) => {
       <div
           onClick={ () => setOpen(open => !open) }
           className = "calendarWrap__input"
-          style={history ? {padding:"1.4rem"} : {padding:"2rem"}}
       >
        { !history && <input
           value={`${format(range[0].startDate, "dd/MM/yyyy")} to ${format(range[0].endDate, "dd/MM/yyyy")}`}

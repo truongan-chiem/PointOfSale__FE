@@ -25,7 +25,7 @@ const TabProductSetting = () => {
 
   const getData = useCallback(
     (_page) => {
-      dispatch(getAllProduct({ page: _page, limit: 10, type: activeTab }));
+      dispatch(getAllProduct({ page: _page, limit: 10, type: activeTab , sortBy : "created_at" , sortType : "decs" }));
     },
     [dispatch, activeTab]
   );
@@ -64,7 +64,7 @@ const TabProductSetting = () => {
             key={`button-${index}`}
             type={"shortcut"}
             icon={item.icon}
-            className={activeTab === item.type ? "active" : ""}
+            className={activeTab === item.type ? "active-listType" : ""}
             onClick={() => setActiveTab(item.type)}
           >
             {item.display}

@@ -15,7 +15,7 @@ import { Notificationz } from "../Notification/Notification";
 import { addItemToBill } from "../../redux/Slice/productSlice";
 
 const Header = ({ title, type = "only-title" }) => {
-  const [searchValue, setSearchValue] = useState();
+  const [searchValue, setSearchValue] = useState("");
   const debounceValue = useDebounce(searchValue, 1000);
 
   const [toggleScan, setToggleScan] = useState(false);
@@ -33,7 +33,7 @@ const Header = ({ title, type = "only-title" }) => {
       setLoading(true);
       API.get(`/product?name=${debounceValue}`).then((res) => {
         if (res.status === 200 && res.data) {
-          setResultSearch(res.data);
+          setResultSearch(res.data.data);
           setOpenPopup(true);
         } else {
           console.log(res);
@@ -114,7 +114,7 @@ const Header = ({ title, type = "only-title" }) => {
 };
 
 const ScanCode = () => {
-  const [qrScan, setQrScan] = useState();
+  const [qrScan, setQrScan] = useState("");
   const dispatch = useDispatch();
   const handleEnter = useCallback(
     (e) => {

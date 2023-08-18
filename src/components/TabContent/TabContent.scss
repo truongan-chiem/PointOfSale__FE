@@ -9,9 +9,43 @@
     &__header{
         flex: 0 1 auto;
         @include flex(center,space-between);
-        & > h1{
-            font-weight: 700;
-            text-transform: capitalize;
+        &__title{
+            @include flex(center,center);
+            & > * ~ *{
+                margin-left: 1rem;
+            }
+            & > h1{
+                font-weight: 700;
+                text-transform: capitalize;
+            }
+            & > .btn{
+                width: fit-content;
+                height: fit-content;
+                padding: 1rem 2rem;
+                background: rgba($color: $main-color, $alpha: 0.3);
+                border-color: transparent;
+                color: rgba($color: gray, $alpha: 0.7);
+                border-radius: 0.5rem;
+                &.activeSort{
+                    background: $main-color;
+                    color: white;
+                    &:hover{
+                        color: white;
+                    }
+                }
+                &.activeHot{
+                    background: #e93a3a;
+                    color: white;
+                }
+                &:hover{
+                    border-color: $main-color;
+                    color: $main-color;
+                }
+                @include mobile{
+                    padding: 1rem;
+                    font-size: 1rem;
+                }
+            }
         }
         & > span{
             color: rgba($color: $black, $alpha: 0.5);

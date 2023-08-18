@@ -4,7 +4,8 @@
     padding: 3rem 2rem 5rem 2rem;
     height: 100%;
     @include mobile{
-        padding: 3rem 0.4rem ;
+        padding: 3rem 1rem ;
+        overflow: hidden;
     }
     font-size: 2rem;
     &__createAcc{
@@ -111,6 +112,9 @@
             font-size: 1.7rem;
             text-transform: capitalize;
             text-align: center;
+            @include mobile{
+                font-size: 1.2rem;
+            }
         }
         & > *:first-child{
             text-align: start
@@ -135,10 +139,17 @@
                 text-transform: capitalize;
                 padding: 1rem 0;
                 font-size: 1.5rem;
+                @include mobile{
+                    font-size: 1.2rem;
+                }
                 &  img{
                     width: 5rem;
                     height: 5rem;
                     border-radius: 50%;
+                    @include mobile{
+                        width: 3rem;
+                        height: 3rem;
+                    }
                 }
                 & > .tableAccount__btn{
                     width: 4rem;
@@ -182,6 +193,17 @@
             background: rgba($color: gray, $alpha: 0.6);
             top: 0;
             left: 0;
+        }
+    }
+    &__empty{
+        @include flex(center,center);
+        width: 100%;
+        height: 100%;
+        font-size: 4rem;
+        font-weight: 700;
+        color: rgba($color: gray, $alpha: 0.6);
+        & > svg{
+            margin-right: 2rem;
         }
     }
 }

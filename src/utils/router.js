@@ -42,41 +42,28 @@ const Router = () => {
 
         {/* public router */}
         <Route element = {<PublicRoute />} >
-          <Route  path='/qrcode' element ={<ConfirmQRCode />}  /> 
           <Route path='/login'   element = {<Login />}/>
         </Route>
+        
+        <Route  path='/qrcode' element ={<ConfirmQRCode />}  /> 
 
     </Routes>
   )
 }
 
-const auth = () =>{
-  const userId = localStorage.getItem('user_id')
-  return userId ? true : false;
-}
+
 
 const PublicRoute = () => {
-  // const isLogin = useSelector(state => state.user.information)
-  const isLogin = auth();
-  return isLogin ? <Navigate to={'/'} />: <Outlet />
+  const userId = sessionStorage.getItem("user_id");
+ 
+  return userId ? <Navigate to={'/'} />: <Outlet />
 }
 
 const PrivateRoute = () => {
-  // const isLogin = useSelector(state => state.user.information)
-  const isLogin = auth();
-  const location = useLocation();
-  
-  const returnPage = () =>{
-    if(location.pathname === '/qrcode'){
-      return <Outlet />
-    }
-    else{
-      return <Layout> <Outlet /></Layout>
-    }
-  }
+  const userId = sessionStorage.getItem("user_id");
   return(
     <>
-    {isLogin ? returnPage() : <Navigate to={'/login'}/>}
+    {userId ? <Layout> <Outlet /></Layout> : <Navigate to={'/login'}/>}
     </>
   )
 }

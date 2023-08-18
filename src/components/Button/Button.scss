@@ -61,14 +61,21 @@
         cursor: pointer;
     }
     &.active{
+        background-color: $main-color;
+        color: $white;
+    }
+    &.active-listType{
         background-color: rgba($color: $main-color, $alpha: 0.2);
         border: 1px solid $main-color;
         color: $main-color;
         cursor: pointer;
     }
     &:active{
-        background-color: $main-color;
-        color: $white;
+        
+        background-color: rgba($color: $main-color, $alpha: 0.2);
+        border: 1px solid $main-color;
+        color: $main-color;
+        cursor: pointer;
     }
     &.disable{
         background-color: rgba($color: $main-color, $alpha: 0.2);
