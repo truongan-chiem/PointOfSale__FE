@@ -8,7 +8,6 @@ import { FiUpload } from "react-icons/fi";
 import { createNewProduct , updateProduct } from "../../redux/Slice/productSlice";
 import "./Form.scss";
 import Loading from "../Loading/Loading";
-import { toggleModalForm } from "../../redux/Slice/modalSlice";
 import { fetchImg } from "../../utils/fetchImage";
 import useFilePreview from "../../hook/useFIlePreview";
 import DropDown from "../DropDown/DropDown";
@@ -44,25 +43,7 @@ const Form = ({ data, setToggleFormEdit }) => {
     }
   }, [data]);
 
-  useEffect(() => {
-    const handleExitForm = e =>{
-      if(e.keyCode === 27){
-        if(data){
-          setToggleFormEdit(false);
-        }
-        else{
-          dispatch(toggleModalForm())
-        }
-      }
-    }
-
-    window.addEventListener('keyup', handleExitForm)
-
-    return () =>{
-      window.removeEventListener('keyup',handleExitForm)
-    }
-  }, [dispatch,data,setToggleFormEdit])
-  
+ 
 
   const [formData, setFormData] = useState({
     name: data?.name || "",

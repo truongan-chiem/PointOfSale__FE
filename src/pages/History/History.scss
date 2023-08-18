@@ -149,13 +149,13 @@
         & > .table {
             
             & > .table__body > .table__body__row > .table__body__row-item{
-                text-align: center !important;
+                text-align: center;
                 & > .iconMore{
                     cursor: pointer;
                 }
             }
             & > .table__header > div{
-                text-align: center !important;
+                text-align: center ;
                 font-size: 2rem;
             }
 

@@ -12,6 +12,7 @@
         & > span{
             color: $main-color;
         }
+        text-align: start;
     }
     &__staff{
         & > h3{
@@ -31,10 +32,12 @@
                 height: 1px;
                 background-color: rgba(117, 117, 117, 0.5);
             }
+            text-align: start;
         }
         &__info{
             margin-top: 2rem;
             @include flex(center,null);
+            text-align: start;
             & > :first-child{
                 width: 50%;
                 & > * ~ * {
@@ -67,6 +70,7 @@
     }
     &__invoice{
         & > h3{
+            text-align: start;
             font-size: 2.2rem;
             @include mobile{
                 font-size: 1.4rem;
@@ -102,6 +106,9 @@
             }
             &__payment{
                 @include flex(center,center);
+                @include mobile{
+                    flex-direction: column;
+                }
                 & > h4 {
                     font-size: 1.6rem;
                     @include mobile{
@@ -121,9 +128,9 @@
                         padding: 0 0.7rem;
                     }
                     @include mobile{
-                        height: 3rem;
+                        height: 2rem;
                         padding: 0 0.4rem;
-
+                        font-size: 1rem;
                         border-radius: 0.5rem;
                         margin: 0 0.5rem;
                     }
@@ -146,6 +153,9 @@
                     align-items: center;
                     & > th:first-child{
                         text-align: start;
+                        @include tablet{
+                            text-align: center;
+                        }
                     }
                     & > th:last-child{
                         text-align: end;

@@ -24,6 +24,19 @@ const Modal = ({ children, className ,onClose }) => {
       document.body.style.overflow = 'overlay';
     }
   }, [])
+
+  useEffect(() => {
+    const handleExitForm = e =>{
+      if(e.keyCode === 27){
+        onClose();
+      }
+    }
+    window.addEventListener('keyup', handleExitForm)
+
+    return () =>{
+      window.removeEventListener('keyup',handleExitForm)
+    }
+  }, [onClose])
   
 
   return (
