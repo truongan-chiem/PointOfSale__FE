@@ -21,7 +21,7 @@ const CardItemMenu = ({_id, name, desc, image, price , quantity ,tabIndex }) => 
     <div className="card-item-menu"  tabIndex={tabIndex}>
       <div className="card-item-menu__info">
         {quantity <= 0 && <img src={soldOut} alt='' className="card-item-menu__info__soldout"/>}
-        <img className="card-item-menu__info__image" src={image.url} alt="" style={quantity <= 0 ? {filter: "grayscale(100%)"} : {}} />
+        <img className="card-item-menu__info__image" src={image?.url} alt="" style={quantity <= 0 ? {filter: "grayscale(100%)"} : {}} />
         <div className="card-item-menu__info__about">
           <h2>{name}</h2>
           <span>{desc}</span>

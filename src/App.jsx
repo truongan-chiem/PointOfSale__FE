@@ -12,7 +12,7 @@ function App() {
   dispatch(connectSocket());
 
   useEffect(() => {
-    const user_id = localStorage.getItem('user_id')
+    const user_id = sessionStorage.getItem('user_id')
     if(user_id){
       dispatch(getInfoUser(user_id))
     }

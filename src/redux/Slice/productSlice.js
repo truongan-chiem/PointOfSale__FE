@@ -40,6 +40,13 @@ const getHotProduct = createAsyncThunk(
     return response.data;
   }
 )
+const addItemToBill = createAsyncThunk(
+  'products/addItemToBill',
+  async ({_id}) =>{
+    const response = await API.get(`/product/${_id}`)
+    return response.data;
+  }
+)
 
 const createNewProduct = createAsyncThunk(
   'products/addNewItem',
@@ -107,30 +114,6 @@ const productSlice = createSlice({
   name: "product",
   initialState,
   reducers: {
-    addItemToBill: (state, action) => {
-      const itemOrder = state.product.listProduct.find((item) => item._id === action.payload._id);
-
-      const existProduct = state.bill.orders.findIndex(item => item._id === action.payload._id)
-      
-      if(existProduct === -1){
-  
-        let newOrder = { ...itemOrder };
-        delete newOrder.desc;
-        delete newOrder.type;
-        delete newOrder.__v;
-        newOrder = {
-          ...newOrder,
-          number: 1
-        };
-        state.bill.orders.push(newOrder);
-      }
-      else{
-        const itemInOrder = state.bill.orders[existProduct];
-
-        state.bill.orders.splice(existProduct,1,{...itemInOrder, number : itemInOrder.number + 1})
-      }
-
-    },
     plusNumber : (state,action) =>{
       const id = action.payload;
 
@@ -200,6 +183,35 @@ const productSlice = createSlice({
         state.product.listProduct.push(data[index].productId)
       }
     })
+    //addItemToBill
+    builder.addCase(addItemToBill.pending , state =>{
+      // state.product.isLoading = true
+    })
+    builder.addCase(addItemToBill.fulfilled , (state,action) =>{
+      const itemOrder = action.payload
+
+      const existProduct = state.bill.orders.findIndex(item => item._id === itemOrder._id)
+      
+        if(existProduct === -1){
+    
+          let newOrder = { ...itemOrder };
+          delete newOrder.desc;
+          delete newOrder.type;
+          delete newOrder.__v;
+          newOrder = {
+            ...newOrder,
+            number: 1
+          };
+          state.bill.orders.push(newOrder);
+        }
+        else{
+          const itemInOrder = state.bill.orders[existProduct];
+  
+          state.bill.orders.splice(existProduct,1,{...itemInOrder, number : itemInOrder.number + 1})
+        }
+    })
+
+
     //create new product
     builder.addCase(createNewProduct.pending , (state) =>{
       state.setting.isLoading = true
@@ -273,5 +285,5 @@ const productSlice = createSlice({
 
 export default productSlice.reducer;
 
-export const { addItemToBill ,plusNumber,minusNumber ,clearBill,changeTab} = productSlice.actions;
-export {getAllProduct,createNewProduct ,deleteProduct ,updateProduct,printBill ,getHotProduct};
+export const {plusNumber,minusNumber ,clearBill,changeTab} = productSlice.actions;
+export {getAllProduct,createNewProduct ,deleteProduct ,updateProduct,printBill ,getHotProduct , addItemToBill};
