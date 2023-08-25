@@ -15,7 +15,8 @@ const DateRange = ({setDate , history = false }) => {
   const [range, setRange] = useState([
     {
       startDate: history ? new Date() :  new Date(new Date().getFullYear(),new Date().getMonth(),1),
-      endDate: history ? new Date() : new Date(new Date().getFullYear(),new Date().getMonth() + 1,0),
+      endDate: new Date(),
+      // endDate: history ? new Date() : new Date(new Date().getFullYear(),new Date().getMonth() + 1,0),
       key: 'selection'
     }
   ])
