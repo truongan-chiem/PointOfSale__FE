@@ -115,6 +115,7 @@
             &.total{
               font-size: 1.5rem;
               font-weight: 700;
+              color : $red;
             }
             &.cash{
                 font-size: 1.4rem;
@@ -123,6 +124,7 @@
             &.refunds{
                 font-size: 1.5rem;
                 margin-top: 1rem;
+                color: $green;
 
             }
         }

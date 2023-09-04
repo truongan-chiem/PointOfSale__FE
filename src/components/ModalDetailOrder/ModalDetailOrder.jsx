@@ -47,10 +47,10 @@ const ModalDetailOrder = ({setOpenDetail ,id}) => {
                     <p>Issued On :</p>
                     <h4>11 March, 2023</h4>
                 </div>
-                <div className='detail-order__invoice__info__payment'>
+                <div className="detail-order__invoice__info__payment">
                     <h4>Payment methods :</h4>
-                    <div>
-                        {order?.optionPayment === 0 ? "Cash" : order?.optionPayment === 1 ? "Debit Card" : "E-Wallet"}
+                    <div className={order?.optionPayment === 0 ? "cash" : 'debit'}>
+                        {order?.optionPayment === 0 ? "Cash" : "Debit Card"}
                     </div>
                 </div>
             </div>
@@ -87,14 +87,14 @@ const ModalDetailOrder = ({setOpenDetail ,id}) => {
                 </tfoot>
                 <tfoot>
                     <tr>
-                        <td colSpan={4}>Tax(10%)</td>
-                        <td><Price price={subTotal * 0.1 } color='black' /></td>
+                        <td style={{color:"gray"}} colSpan={4}>Tax(10%)</td>
+                        <td><Price price={subTotal * 0.1 } color='gray' /></td>
                     </tr>
                 </tfoot>
                 <tfoot>
                     <tr>
-                        <td colSpan={4}>Total</td>
-                        <td><Price price={subTotal + subTotal * 0.1} color="black" /></td>
+                        <td style={{color:"#FD6D6D"}} colSpan={4}>Total</td>
+                        <td><Price price={subTotal + subTotal * 0.1} color="red" /></td>
                     </tr>
                 </tfoot>
                 <tfoot>
@@ -105,8 +105,8 @@ const ModalDetailOrder = ({setOpenDetail ,id}) => {
                 </tfoot>
                 <tfoot>
                     <tr>
-                        <td colSpan={4}>Refunds</td>
-                        <td><Price price={order?.cash - (subTotal + subTotal * 0.1)} color="black" /></td>
+                        <td style={{color:"#54CA93"}} colSpan={4}>Refunds</td>
+                        <td><Price price={order?.cash - (subTotal + subTotal * 0.1)} color="green" /></td>
                     </tr>
                 </tfoot>
                 

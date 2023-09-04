@@ -9,4 +9,13 @@
     &-gray{
         color: rgba($color: $black, $alpha: 0.4);
     }
+    &-primary{
+        color: $main-color;
+    }
+    &-red{
+        color: $red;
+    }
+    &-green{
+        color: $green;
+    }
 }

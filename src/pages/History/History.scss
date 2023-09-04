@@ -145,18 +145,25 @@
                 width:6rem;
                 height: 3rem;
             }
+            &.cash{
+                background-color: $green;
+            }
+            &.debit{
+                background-color: #56C3C9;
+            }
         }
-        & > .table {
-            
+        & > .table {  
             & > .table__body > .table__body__row > .table__body__row-item{
                 text-align: center;
                 & > .iconMore{
                     cursor: pointer;
                 }
             }
-            & > .table__header > div{
+            & > .table__header {
+                & > div{
                 text-align: center ;
                 font-size: 2rem;
+                }
             }
 
         } 

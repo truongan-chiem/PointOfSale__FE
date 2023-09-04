@@ -56,7 +56,7 @@ const ItemBody = ({item,target}) =>{
         <img src={target === 'trending product' ? item.productId.image.url : item.image.url} alt="" />
         <div className='itemBody__left__info'>
           <h3>{target === 'trending product' ? item.productId.name : item.name}</h3>
-          <Price price={target === 'trending product' ? item.productId.price : item.price} color={'black'}/>
+          <Price price={target === 'trending product' ? item.productId.price : item.price} color={'primary'}/>
         </div>
       </div>
       <div className='itemBody__right'>

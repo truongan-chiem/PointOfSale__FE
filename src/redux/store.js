@@ -1,4 +1,4 @@
-import { configureStore } from "@reduxjs/toolkit";
+import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import accountSlice from "./Slice/accountSlice";
 import productSlice from "./Slice/productSlice";
 import modalSlice from "./Slice/modalSlice";
@@ -8,7 +8,7 @@ import statisticSlice from "./Slice/statisticSlice";
 import toggleBillSlice from "./Slice/toggleBillSlice";
 import socketSlice from "./Slice/socketSlice";
 
-const rootReducers = {
+const rootReducers = combineReducers({
   products : productSlice,
   modal : modalSlice,
   account : accountSlice,
@@ -17,7 +17,7 @@ const rootReducers = {
   user : userSlice,
   toggleBill : toggleBillSlice,
   socket : socketSlice,
-}
+})
 
 export const store = configureStore({
   reducer: rootReducers,

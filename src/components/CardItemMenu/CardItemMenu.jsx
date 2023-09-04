@@ -25,7 +25,7 @@ const CardItemMenu = ({_id, name, desc, image, price , quantity ,tabIndex }) => 
         <div className="card-item-menu__info__about">
           <h2>{name}</h2>
           <span>{desc}</span>
-          <Price price={price} color="black" />
+          <Price price={price} color="primary" />
         </div>
       </div>
       <div className="card-item-menu__btn">

@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import './Popup.scss'
-const Popup = ({children,setOpen,popupRef}) => {
+const Popup = ({children,setOpen,popupRef,className}) => {
 
   useEffect(() => {
     const handleClickOutSide = (e) =>{
@@ -19,7 +19,7 @@ const Popup = ({children,setOpen,popupRef}) => {
   
 
   return (
-    <div className='popup'>
+    <div className={`popup ${className}`}>
         {children}
     </div>
   )

@@ -139,6 +139,14 @@
                 text-transform: capitalize;
                 padding: 1rem 0;
                 font-size: 1.5rem;
+                &.fname{
+                    cursor: pointer;
+                    font-weight: 600;
+                    transition: all 0.3s ease;
+                    &:hover{
+                        color: $main-color;
+                    }
+                }
                 @include mobile{
                     font-size: 1.2rem;
                 }

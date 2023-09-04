@@ -20,7 +20,7 @@ const Router = () => {
       document.title = 'Home'
     }
     else if(path === '/login'){
-      document.title = 'POS-CoffeeShop'
+      document.title = 'Point Of Sale'
     }
     else{
       const title = path.slice(1)

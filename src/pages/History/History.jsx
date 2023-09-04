@@ -119,104 +119,109 @@ const History = () => {
         </div>
 
         <div className="history__body">
-            <div className="table">
-              <div className="table__header">
-                <div>Full name</div>
-                <div className="pointer" onClick={() => handleSort("created_at")}>
-                  <p>Date</p>
-                  {sortBy === "created_at" && sortType === "decs" ? (
+          <div className="table">
+            <div className="table__header">
+              <div className="table__header__fullName">Full name</div>
+              <div className="pointer" onClick={() => handleSort("created_at")}>
+                <p>Date</p>
+                {sortBy === "created_at" && sortType === "decs" ? (
+                  <FaSortAmountDown />
+                ) : sortBy === "created_at" && sortType === "acs" ? (
+                  <FaSortAmountUpAlt />
+                ) : (
+                  <></>
+                )}
+              </div>
+              {width >= 768 && (
+                <div className="pointer" onClick={() => handleSort("count")}>
+                  <p>Count</p>
+                  {sortBy === "count" && sortType === "decs" ? (
                     <FaSortAmountDown />
-                  ) : sortBy === "created_at" && sortType === "acs" ? (
+                  ) : sortBy === "count" && sortType === "acs" ? (
                     <FaSortAmountUpAlt />
                   ) : (
                     <></>
                   )}
                 </div>
-                {width >= 768 && (
-                  <div className="pointer" onClick={() => handleSort("count")}>
-                    <p>Count</p>
-                    {sortBy === "count" && sortType === "decs" ? (
-                      <FaSortAmountDown />
-                    ) : sortBy === "count" && sortType === "acs" ? (
-                      <FaSortAmountUpAlt />
-                    ) : (
-                      <></>
-                    )}
-                  </div>
-                )}
-                {width >= 768 && (
-                  <div className="pointer" onClick={() => handleSort("totalPrice")}>
-                    <p>Amount</p>
-                    {sortBy === "totalPrice" && sortType === "decs" ? (
-                      <FaSortAmountDown />
-                    ) : sortBy === "totalPrice" && sortType === "acs" ? (
-                      <FaSortAmountUpAlt />
-                    ) : (
-                      <></>
-                    )}
-                  </div>
-                )}
-                {width >= 768 && (
-                  <div className="pointer" onClick={() => handleSort("optionPayment")}>
-                    <p>Payment</p>
-                    {sortBy === "optionPayment" && sortType === "decs" ? (
-                      <FaSortAmountDown />
-                    ) : sortBy === "optionPayment" && sortType === "acs" ? (
-                      <FaSortAmountUpAlt />
-                    ) : (
-                      <></>
-                    )}
-                  </div>
-                )}
-                <div>Action</div>
-              </div>
-              <div className="table__body">
-                {isLoading ? <div className="history__body__loading">
-                  <VscLoading />
-                </div> : 
-                listData.length > 0 ? (
-                  listData.map((item, index) => {
-                    const date = moment(item.created_at).format("DD/MM/YYYY");
-                    return (
-                      <div className="table__body__row" key={index}>
-                        <div className="table__body__row-item">
-                          {item.owenId.lastName}&nbsp;{item.owenId.firstName}
-                        </div>
-                        <div className="table__body__row-item">{date}</div>
-                        {width >= 768 && (
-                          <>
-                            <div className="table__body__row-item">{item.count}</div>
-                            <div className="table__body__row-item">
-                              <Price price={item.totalPrice} color={"black"} className="history__price" />
-                            </div>
-                            <div
-                              className="table__body__row-item"
-                              style={{ display: "flex", justifyContent: "center" }}
-                            >
-                              <div className="history__body__payment">
-                                {item.optionPayment === 0
-                                  ? "Cash"
-                                  : item.optionPayment === 1
-                                  ? "Debit"
-                                  : "E-Wallet"}
-                              </div>
-                            </div>
-                          </>
-                        )}
-                        <div className="table__body__row-item">
-                          <Action name={`Order ${item._id}`} id={item._id} />
-                        </div>
-                      </div>
-                    );
-                  })
-                ) : (
-                    <div id="no-result-history">
-                      <TbDatabaseOff />
-                      <p>No results found</p>
-                    </div>
-                )}
-              </div>
+              )}
+              {width >= 768 && (
+                <div className="pointer" onClick={() => handleSort("totalPrice")}>
+                  <p>Amount</p>
+                  {sortBy === "totalPrice" && sortType === "decs" ? (
+                    <FaSortAmountDown />
+                  ) : sortBy === "totalPrice" && sortType === "acs" ? (
+                    <FaSortAmountUpAlt />
+                  ) : (
+                    <></>
+                  )}
+                </div>
+              )}
+              {width >= 768 && (
+                <div className="pointer" onClick={() => handleSort("optionPayment")}>
+                  <p>Payment</p>
+                  {sortBy === "optionPayment" && sortType === "decs" ? (
+                    <FaSortAmountDown />
+                  ) : sortBy === "optionPayment" && sortType === "acs" ? (
+                    <FaSortAmountUpAlt />
+                  ) : (
+                    <></>
+                  )}
+                </div>
+              )}
+              <div>Action</div>
             </div>
+            <div className="table__body">
+              {isLoading ? (
+                <div className="history__body__loading">
+                  <VscLoading />
+                </div>
+              ) : listData.length > 0 ? (
+                listData.map((item, index) => {
+                  const date = moment(item.created_at).format("DD/MM/YYYY");
+                  return (
+                    <div className="table__body__row" key={index}>
+                      <div className="table__body__row-item">
+                        {item.owenId.lastName}&nbsp;{item.owenId.firstName}
+                      </div>
+                      <div className="table__body__row-item">{date}</div>
+                      {width >= 768 && (
+                        <>
+                          <div className="table__body__row-item">{item.count}</div>
+                          <div className="table__body__row-item">
+                            <Price
+                              price={item.totalPrice}
+                              color={"black"}
+                              className="history__price"
+                            />
+                          </div>
+                          <div
+                            className="table__body__row-item"
+                            style={{ display: "flex", justifyContent: "center" }}
+                          >
+                            <div
+                              className={`history__body__payment ${
+                                item.optionPayment === 0 ? "cash" : "debit"
+                              }`}
+                            >
+                              {item.optionPayment === 0 ? "Cash" : "Debit"}
+                            </div>
+                          </div>
+                        </>
+                      )}
+                      <div className="table__body__row-item">
+                        <Action name={`Order ${item._id}`} id={item._id} />
+                      </div>
+                    </div>
+                  );
+                })
+              ) : (
+                <div id="no-result-history">
+                  <TbDatabaseOff />
+                  <p>No results found</p>
+                </div>
+              )}
+            </div>
+          </div>
         </div>
         <Pagination currentPage={currentPage} getData={getData} totalPage={totalPage} />
       </Box>

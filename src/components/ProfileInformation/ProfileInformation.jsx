@@ -49,7 +49,7 @@ const ProfileInformation = () => {
       dataForm.append(key,value)
     })
 
-    dispatch(updateInfo(dataForm))
+    dispatch(updateInfo({dataForm}))
   };
 
 

@@ -7,7 +7,7 @@ const initialState = {
   isLoading : false,
   totalItem : null,
   profit : null,
-  ProductSold : null
+  ProductSold : null,
 };
 
 const getHistory = createAsyncThunk(
@@ -66,7 +66,7 @@ const historySlice = createSlice({
       const newList = state.listData.filter(item => item._id !== id)
       state.listData = newList
     })
-  }
+    }
 });
 
 export default historySlice.reducer;

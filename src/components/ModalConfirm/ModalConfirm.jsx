@@ -53,11 +53,11 @@ const EnterMoney = ({setMoney,money,messError,handleConfirm}) =>{
         handleConfirm();
       }
       if(e.keyCode === 9){
-        if(Number((money+"000").replaceAll(".","") ) < 100000000){
+        if(Number((money+"000").replaceAll(".","") ) < 10000000000){
           setMoney(prev => formatNumber(prev + "000"))
         }
         else{
-          setMoney(formatNumber("100000000"))
+          setMoney(formatNumber("10000000000"))
         }
       }
     }
@@ -80,11 +80,11 @@ const EnterMoney = ({setMoney,money,messError,handleConfirm}) =>{
   
   const handleChange = e => {
     const {value} = e.target
-    if(Number(value.replaceAll(".","")) < 100000000){
+    if(Number(value.replaceAll(".","")) < 10000000000){
         setMoney(formatNumber(value))
     }
-    else if (Number(value.replaceAll(".","")) >= 100000000){
-      setMoney(formatNumber("100000000"))
+    else if (Number(value.replaceAll(".","")) >= 10000000000){
+      setMoney(formatNumber("10000000000"))
     }
   }
 

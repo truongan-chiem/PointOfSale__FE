@@ -4,6 +4,13 @@ import { Notificationz } from "../../components/Notification/Notification";
 
 const initialState = {
   listAccount : [],
+  getOrder:{
+    listOrder:[],
+    isLoading : false,
+    profit:null,
+    totalOrders:null,
+    productsSold:null
+  },
   pagination :{
     totalItem : null
   },
@@ -69,7 +76,34 @@ const updateAccount = createAsyncThunk(
         }
     }
 )
-
+// get order by name
+const getOrderByName = createAsyncThunk(
+    'account/getOrderByName',
+    async (data,{rejectWithValue}) => {
+      try {
+        let {page,fullName} = data;
+        
+        // const start = new Date(new Date().getFullYear(),new Date().getMonth(),1);
+        // const end = new Date(new Date().getFullYear(),new Date().getMonth() + 1,0);
+        const start = new Date(new Date().getFullYear(),new Date().getMonth()-1,1);
+        const end = new Date(new Date().getFullYear(),new Date().getMonth() + 1,0);
+        let newData = {
+          start,
+          end,
+          limit : 500,
+          page : page,
+          sortBy : "created_at",
+          sortType: "decs",
+          fullName
+        }
+        const qs = "?" + new URLSearchParams(newData).toString()
+        const response = await API.get(`/acc/order${qs}`)
+        return response.data
+      } catch (error) {
+        return rejectWithValue(error)
+      }
+    }
+  )
 
 const accountSlice = createSlice({
   name: "account",
@@ -136,6 +170,7 @@ const accountSlice = createSlice({
         state.listAccount.splice(index,1,data)
         Notificationz("Update Account Success !!!")
         setToggleForm(false)
+        
     })
     builder.addCase(updateAccount.rejected,(state,action) =>{
         state.createAcc.isLoading = false
@@ -147,9 +182,26 @@ const accountSlice = createSlice({
             Notificationz("Server Error !!!",'error')
         }
     })
+    //get order by name
+    builder.addCase(getOrderByName.pending,(state) =>{
+       state.getOrder.isLoading = true
+
+    })
+    builder.addCase(getOrderByName.fulfilled,(state,action) =>{
+        state.getOrder.isLoading = false
+        const {data,countProductSold,profit,totalItem} = action.payload
+        state.getOrder.listOrder = data
+        state.getOrder.profit = profit
+        state.getOrder.productsSold=countProductSold
+        state.getOrder.totalOrders=totalItem
+    })
+    builder.addCase(getOrderByName.rejected,(state,action) =>{
+        console.log(action.payload);
+        state.getOrder.isLoading = false
+    })
   }
 });
 
 export default accountSlice.reducer;
 
-export {getAllAccount,createAccount,deleteAccount,updateAccount}
+export {getAllAccount,createAccount,deleteAccount,updateAccount,getOrderByName}

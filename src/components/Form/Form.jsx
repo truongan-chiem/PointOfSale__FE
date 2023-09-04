@@ -122,7 +122,7 @@ const Form = ({ data, setToggleFormEdit }) => {
             />
             <Input
               className={"form__wrapInput__item"}
-              placeholder={"QR Scan"}
+              placeholder={"Bar Scan"}
               disabled = {data ? true : false}
               left={"1rem"}
               onChange={(e) => setFormData((prev) => ({ ...prev, qrScan: e.target.value }))}
@@ -168,7 +168,7 @@ const Form = ({ data, setToggleFormEdit }) => {
             ) : (
               <>
                 <FiUpload />
-                <span>Choose Image Dish</span>
+                <span>Choose Image Product</span>
               </>
             )}
           </div>

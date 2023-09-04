@@ -8,6 +8,10 @@ import "./BoxOrderTrending.scss";
 import { useState } from "react";
 
 const BoxOrderTrending = ({ title, data }) => {
+  const date = new Date();
+
+  const month = date.getMonth() + 1;
+  const year = date.getFullYear();
   const [toggleModal, setToggleModal] = useState(false);
   const [target, setTarget] = useState();
   const renderContent = (item) => {
@@ -41,6 +45,7 @@ const BoxOrderTrending = ({ title, data }) => {
             <span>View all</span> <BsArrowRightShort />
           </button>
         </div>
+        <p className="box-order-trending__time">{title ==="trending product" ? `Month: ${month}/${year}` : "Inventory"}</p>
         <h3 className="box-order-trending__subtitle">Products</h3>
         {data.length > 0 ? (
           <div className="box-order-trending__listItem">

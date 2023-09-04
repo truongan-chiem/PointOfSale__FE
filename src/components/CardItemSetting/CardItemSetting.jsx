@@ -23,7 +23,7 @@ const CardItemSetting = ({ item }) => {
         />
         <img src={image?.url} alt="" />
         <h1 className="card-item-setting__name">{name}</h1>
-        <Price price={price}  className = "card-item-setting__price"/>
+        <Price price={price}  className = "card-item-setting__price" color={"primary"}/>
         <p className="card-item-setting__quantity">Quantity : {quantity}</p>
         <button className="card-item-setting__btn" onClick={() => setToggleFormEdit(true)}>
           <BsPencilFill />

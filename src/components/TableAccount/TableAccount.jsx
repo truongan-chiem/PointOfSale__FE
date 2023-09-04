@@ -16,12 +16,15 @@ import Pagination from "../Pagination/Pagination";
 import Input from "../Input/Input";
 import useDebounce from "../../hook/useDebounce";
 import { TbDatabaseOff } from "react-icons/tb";
+import ModalDetailAccount from "../ModalDetailAccount/ModalDetailAccount";
 
 const TableAccount = () => {
   const [toggleForm, setToggleForm] = useState(false);
   const [toggleDeleteModal, setToggleDeleteModal] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
   const [targetIndexAccount, setTargetIndexAccount] = useState(null);
+  const [openModalDetailAccount, setOpenModalDetailAccount] = useState(false)
+  const [targetAccount, setTargetAccount] = useState()
 
   const dispatch = useDispatch();
   const listAccount = useSelector((state) => state.account.listAccount);
@@ -61,11 +64,15 @@ const TableAccount = () => {
 
   useEffect(() => {
     if (debounceValue) {
-      console.log(debounceValue);
       currentPage.current = 1;
       getData(currentPage.current);
     }
   }, [debounceValue, getData]);
+
+  const handleClickFname = (item) =>{
+    setOpenModalDetailAccount(true)
+    setTargetAccount(item)
+  }
 
   return (
     <div className="table-account">
@@ -100,7 +107,7 @@ const TableAccount = () => {
               (item, index) =>
                 item._id !== user._id && (
                   <div className="table__body__row" key={`account-row-${item._id}`}>
-                    <div className="table__body__row-item">
+                    <div className="table__body__row-item fname" onClick={() => handleClickFname(item)}>
                       {item.firstName + " " + item.lastName}
                     </div>
                     <div className="table__body__row-item">{item.gender}</div>
@@ -159,6 +166,7 @@ const TableAccount = () => {
           setIsToggleDelete={setToggleDeleteModal}
         />
       )}
+      {openModalDetailAccount && <ModalDetailAccount targetAccount = {targetAccount} setOpenModalDetailAccount={setOpenModalDetailAccount} />}
     </div>
   );
 };

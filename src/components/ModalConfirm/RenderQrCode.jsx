@@ -42,7 +42,7 @@ export const RenderQrCode = ({setOpenConfirm,handleConfirm,setMoney,totalAmount}
   return (
     <div className="modal-confirm__qrcode">
       <h2 className="modal-confirm__qrcode__title">Scan QR To Purchase</h2>
-      <QRCode size={200} value={window.location.origin + `/qrcode`} viewBox={`0 0 256 256`} />
+      <QRCode size={200} value={`http://192.168.100.15:3000/qrcode`} viewBox={`0 0 256 256`} />
       <div className="modal-confirm__qrcode__support">
         <BsQrCode />
         <p>Use a camera app that supports QR code to scan the code</p>

@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useId, useState } from "react";
+import React, { useEffect, useId, useState } from "react";
 import { BsPencilFill, BsFillPersonFill } from "react-icons/bs";
 import { BiLogOut } from "react-icons/bi";
 import { IoLockOpen } from "react-icons/io5";
@@ -9,7 +9,7 @@ import ItemSubSidebar from "../../components/ItemSubSidebar/ItemSubSidebar";
 
 import "./Profile.scss";
 import { useDispatch, useSelector } from "react-redux";
-import { logout, updateImage } from "../../redux/Slice/userSlice";
+import { logout, updateInfo } from "../../redux/Slice/userSlice";
 import ProfileInformation from "../../components/ProfileInformation/ProfileInformation";
 import ChangePassword from "../../components/ChangePassword/ChangePassword";
 import { useNavigate } from "react-router-dom";
@@ -17,7 +17,6 @@ import Modal from "../../components/Modal/Modal";
 import useFilePreview from "../../hook/useFIlePreview";
 import { fetchImg } from "../../utils/fetchImage";
 import Button from "../../components/Button/Button";
-import { updateAccount } from "../../redux/Slice/accountSlice";
 import Loading from "../../components/Loading/Loading";
 import { Notificationz } from "../../components/Notification/Notification";
 
@@ -96,7 +95,7 @@ const EditImg = ({ url, setEditImage ,userId}) => {
   const [fileImage, setFileImage] = useState();
   const [filePreview] = useFilePreview(fileImage, "single");
   const dispatch = useDispatch()
-  const isLoading = useSelector(state => state.account.createAcc.isLoading)
+  const isLoading = useSelector(state => state.user.update.isLoading)
   const [curError, setCurError] = useState("")
 
   useEffect(() => {
@@ -110,20 +109,18 @@ const EditImg = ({ url, setEditImage ,userId}) => {
       Notificationz(curError,"error");
     }
   }, [curError])
-  const handleUpdateAvatar = useCallback(() => {
-      dispatch(updateImage(filePreview))
-  },[filePreview,dispatch])
+
   const handleSave = () =>{
     const data = new FormData()
     if(fileImage.type.slice(0,5) === "image"){
       data.append("image",fileImage)
-      dispatch(updateAccount({id : userId,dataForm : data , setToggleForm : setEditImage , handleUpdateAvatar}))
+      dispatch(updateInfo({dataForm : data , setToggleForm : setEditImage}))
     }
     else{
       setCurError("File Image Invalid!!!")
     }
   }
-
+  
   return (
    <>
     {isLoading && <Loading />}

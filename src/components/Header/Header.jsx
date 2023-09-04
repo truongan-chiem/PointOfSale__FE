@@ -152,7 +152,7 @@ const ScanCode = () => {
 
   return (
     <Input
-      placeholder={"QR Code"}
+      placeholder={"Bar Code"}
       className={`header__right__search__input`}
       isSeach={true}
       icon={<BsUpcScan />}

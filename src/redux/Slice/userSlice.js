@@ -52,11 +52,11 @@ const getInfoUser = createAsyncThunk(
 //update information
 const updateInfo = createAsyncThunk(
     'user/update',
-    async (dataForm,{rejectWithValue,getState}) =>{
+    async ({dataForm,setToggleForm},{rejectWithValue,getState}) =>{
         const state = getState();
         try {
             const response = await API.put(`/acc/update/${state.user.information._id}`,dataForm)
-            return response.data
+            return {response : response.data,setToggleForm}
         } catch (error) {
             return rejectWithValue(error)
         }
@@ -109,10 +109,12 @@ const userSlice = createSlice({
     })
     builder.addCase(updateInfo.fulfilled , (state,action) =>{
         state.update.isLoading = false
-        const {success,data} = action.payload
+        const {response,setToggleForm = () =>{}} = action.payload;
+        const {success,data} = response
         if(success){
             state.information = data
             Notificationz("Update Profile Success!!!")
+            setToggleForm(false)
         }
     })
     builder.addCase(updateInfo.rejected , (state,action) =>{

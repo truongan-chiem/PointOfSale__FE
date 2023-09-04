@@ -150,7 +150,7 @@ const Bill = (props,ref) => {
             <div className="divider" />
             <div className="bill__info__row total">
               <h2>Total</h2>
-              <Price price={total} color="black" />
+              <Price price={total} color="red" />
             </div>
             <div className="billPDF__cash">
               <div className="bill__info__row cash">
@@ -160,7 +160,7 @@ const Bill = (props,ref) => {
               <div className="divider" />
               <div className="bill__info__row refunds">
                   <h3>Refunds</h3>
-                  <Price price={Number(money?.replaceAll('.','')) - total} color={'black'}/>
+                  <Price price={Number(money?.replaceAll('.','')) - total} color={'green'}/>
               </div>
             </div>
           </div>

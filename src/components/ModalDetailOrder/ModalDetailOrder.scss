@@ -116,11 +116,16 @@
                     }
                 }
                 & > div{
-                    background-color: #56C3C9;
                     border-radius: 1rem;
                     padding: 0 1.6rem;
                     height: 4rem;
                     color: $white;
+                    &.cash{
+                        background-color: $green;
+                    }
+                    &.debit{
+                        background-color: #56C3C9;
+                    }
                     @include flex(center,center);
                     font-size: 1.4rem;
                     margin: 0 2rem;
