@@ -49,8 +49,8 @@ const ModalDetailOrder = ({setOpenDetail ,id}) => {
                 </div>
                 <div className="detail-order__invoice__info__payment">
                     <h4>Payment methods :</h4>
-                    <div className={order?.optionPayment === 0 ? "cash" : 'debit'}>
-                        {order?.optionPayment === 0 ? "Cash" : "Debit Card"}
+                    <div className={order?.optionPayment === 0 ? "cash" : 'e-wallet'}>
+                        {order?.optionPayment === 0 ? "Cash" : "E-Wallet"}
                     </div>
                 </div>
             </div>

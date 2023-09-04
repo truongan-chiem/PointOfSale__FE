@@ -200,10 +200,10 @@ const History = () => {
                           >
                             <div
                               className={`history__body__payment ${
-                                item.optionPayment === 0 ? "cash" : "debit"
+                                item.optionPayment === 0 ? "cash" : "ewallet"
                               }`}
                             >
-                              {item.optionPayment === 0 ? "Cash" : "Debit"}
+                              {item.optionPayment === 0 ? "Cash" : "E-Wallet"}
                             </div>
                           </div>
                         </>

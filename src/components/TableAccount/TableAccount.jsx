@@ -17,6 +17,7 @@ import Input from "../Input/Input";
 import useDebounce from "../../hook/useDebounce";
 import { TbDatabaseOff } from "react-icons/tb";
 import ModalDetailAccount from "../ModalDetailAccount/ModalDetailAccount";
+import Loading from "../Loading/Loading";
 
 const TableAccount = () => {
   const [toggleForm, setToggleForm] = useState(false);
@@ -102,6 +103,7 @@ const TableAccount = () => {
           {user.role === 2 && <p>actions</p>}
         </div>
         <div className="table__body">
+          {isLoading && <Loading />}
           {listAccount.length > 0 ? (
             listAccount.map(
               (item, index) =>

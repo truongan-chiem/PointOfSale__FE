@@ -8,7 +8,8 @@ const initialState = {
     isLoading : false,
     haveData : true,
     changeTabType : false,
-    totalItem : null
+    totalItem : null,
+    isLoadingAddItem:false
   },
   bill :{
     orders: [],
@@ -185,10 +186,12 @@ const productSlice = createSlice({
     })
     //addItemToBill
     builder.addCase(addItemToBill.pending , state =>{
-      // state.product.isLoading = true
+      state.product.isLoadingAddItem = true
     })
     builder.addCase(addItemToBill.fulfilled , (state,action) =>{
       const itemOrder = action.payload
+      state.product.isLoadingAddItem = false
+
 
       const existProduct = state.bill.orders.findIndex(item => item._id === itemOrder._id)
       

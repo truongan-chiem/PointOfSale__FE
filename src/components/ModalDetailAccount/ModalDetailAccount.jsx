@@ -8,8 +8,10 @@ import { getOrderByName } from '../../redux/Slice/accountSlice'
 import moment from 'moment'
 import Price from '../Price/Price'
 import { TbDatabaseOff } from 'react-icons/tb'
+import { VscLoading } from "react-icons/vsc";
+
 const ModalDetailAccount = ({targetAccount,setOpenModalDetailAccount}) => {
-    const {listOrder, profit, totalOrders, productsSold} = useSelector(state => state.account.getOrder)
+    const {listOrder, profit, totalOrders, productsSold,isLoading} = useSelector(state => state.account.getOrder)
    const dispatch = useDispatch();
 
    const date = new Date();
@@ -76,13 +78,14 @@ const ModalDetailAccount = ({targetAccount,setOpenModalDetailAccount}) => {
                     <p>Payment</p>
                 </div>
             <div className='detailAcc__list__result-body'>
+                {isLoading && <div className='detailAcc__list__result-body-loading'><VscLoading /></div>}
                 {listOrder.length > 0 ? listOrder.map(item => (
                     <div key={`orderAcc-${item._id}`} className='detailAcc__list__result-body-item'>
                         <p>{moment(item.created_at).format("DD/MM/YYYY")}</p>
                         <p>{item.count}</p>
                         <Price price={item.totalPrice} color={"primary"} />
                         <div className='detailAcc__list__result-body-item-payment'>
-                            <p className={item.optionPayment === 0 ? "cash" : "debit"}>{item.optionPayment === 0 ?"Cash" :"Debit"}</p>
+                            <p className={item.optionPayment === 0 ? "cash" : "e-wallet"}>{item.optionPayment === 0 ?"Cash" :"E-Wallet"}</p>
                         </div>
                     </div>
                 )) : <div className='detailAcc__list__result-body-empty'>

@@ -1,5 +1,7 @@
 import React, { useCallback, useEffect, useRef } from "react";
 import CardItemMenu from "../CardItemMenu/CardItemMenu";
+import Loading from '../Loading/Loading'
+
 import "./TabContent.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { changeTab, getAllProduct, getHotProduct } from "../../redux/Slice/productSlice";
@@ -11,6 +13,7 @@ import Button from "../Button/Button";
 const TabContent = ({ tabValue, setTabValue }) => {
   const titleTab = tabValue + " menu";
   const isLoading = useSelector((state) => state.products.product.isLoading);
+  const isLoadingAddItem = useSelector((state) => state.products.product.isLoadingAddItem);
 
   const listProduct = useSelector((state) => state.products.product.listProduct);
   const totalItem = useSelector((state) => state.products.product.totalItem);
@@ -109,6 +112,7 @@ const TabContent = ({ tabValue, setTabValue }) => {
           <VscLoading />
         </div>
       )}
+      {isLoadingAddItem && <Loading />}
     </div>
   );
 };

@@ -83,8 +83,6 @@ const getOrderByName = createAsyncThunk(
       try {
         let {page,fullName} = data;
         
-        // const start = new Date(new Date().getFullYear(),new Date().getMonth(),1);
-        // const end = new Date(new Date().getFullYear(),new Date().getMonth() + 1,0);
         const start = new Date(new Date().getFullYear(),new Date().getMonth()-1,1);
         const end = new Date(new Date().getFullYear(),new Date().getMonth() + 1,0);
         let newData = {

@@ -123,7 +123,7 @@
                     &.cash{
                         background-color: $green;
                     }
-                    &.debit{
+                    &.e-wallet{
                         background-color: #56C3C9;
                     }
                     @include flex(center,center);
