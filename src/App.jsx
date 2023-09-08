@@ -10,7 +10,7 @@ import axios from "axios";
 function App() {
   const dispatch = useDispatch()
   console.log(process.env.NODE_ENV);
-  axios.get(process.env.NODE_ENV === "development" ? `http://${window.location.hostname}:5000/ip` : `${process.env.REACT_APP_API}/ip`)
+  axios.get(process.env.NODE_ENV === "development" ? `http://${window.location.hostname}:5000/ip` : `${process.env.REACT_APP_API}ip`)
   .then(res =>{
     dispatch(connectSocket(res.data.ip));
   })
