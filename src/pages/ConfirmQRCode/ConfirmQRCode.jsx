@@ -8,8 +8,9 @@ const ConfirmQRCode = () => {
   const socket = useSelector(state => state.socket.socket)
   
   useEffect(() => {
-
-    socket.emit("thanh toan" , {message : "finshed!"})
+   if(socket){
+      socket.emit("thanh toan" , {message : "finshed!"})
+    }
     
   }, [socket])
   

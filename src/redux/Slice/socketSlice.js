@@ -7,14 +7,16 @@ const initialState = {
     socket : null
 };
 
-//create account
+//create socket slce
 
 const socketSlice = createSlice({
-  name: "account",
+  name: "socket",
   initialState,
   reducers : {
-    connectSocket : (state) =>{
-        state.socket = io("http://192.168.100.15:5000" , {transports : ['websocket']})
+    connectSocket : (state,action) =>{
+       const ip = action.payload
+       state.socket = io(`http://${ip}:5000` , {transports : ['websocket']})
+      
         // state.socket = io(process.env.REACT_APP_API , {transports : ['websocket']})
     }
   },
