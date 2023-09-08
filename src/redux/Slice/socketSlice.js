@@ -14,10 +14,9 @@ const socketSlice = createSlice({
   initialState,
   reducers : {
     connectSocket : (state,action) =>{
-       const ip = action.payload
-       state.socket = io(`http://${ip}:5000` , {transports : ['websocket']})
-      
-        // state.socket = io(process.env.REACT_APP_API , {transports : ['websocket']})
+        const ip = action.payload
+        const  url = process.env.NODE_ENV !== "development" ? process.env.REACT_APP_API : `http://${ip}:5000`
+        state.socket = io(url , {transports : ['websocket']})
     }
   },
 });
