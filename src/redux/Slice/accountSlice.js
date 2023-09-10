@@ -163,8 +163,6 @@ const accountSlice = createSlice({
         const {response,setToggleForm = () =>{}} = action.payload
         const {data} = response;
         const index = state.listAccount.findIndex(item => item._id === data._id)
-        delete data.phoneNumber
-        delete data.address
         state.listAccount.splice(index,1,data)
         Notificationz("Update Account Success !!!")
         setToggleForm(false)
